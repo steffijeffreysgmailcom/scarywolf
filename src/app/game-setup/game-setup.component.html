@@ -36,7 +36,11 @@
     <button class="btn btn-primary selected">
         <a routerLink="/play" routerLinkActive="active">Start Game!</a>
     </button>
-
+    <input
+        type="checkbox"
+        [checked]="isChecked"
+        (change)="isChecked = !isChecked"/>
+    <p>isChecked is {{ isChecked }} </p>
 </div>
 <br/>
 <br/>

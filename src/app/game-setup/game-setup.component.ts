@@ -13,7 +13,8 @@ export class GameSetupComponent implements OnInit {
   SelectedHunter: boolean = false;
   WolvesCounter: number = 0;
   VillagerCounter: number = 0;
-
+  isChecked = false;
+  
   constructor(private data: DataStore) { }
   ngOnInit() {
     this.data.StoreCharacter('Greg');
