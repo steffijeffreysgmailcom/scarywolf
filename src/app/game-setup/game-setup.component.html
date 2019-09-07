@@ -1,7 +1,48 @@
 
 <h1>Scary wolf game</h1>
 <br/>
-<button type="button"  class="btn btn-primary" id="selectwitch"> Witch </button> <p id="witchselectedtext">Not selected</p>
+
+<div class="row" class='pageContent'>
+
+    <button *ngIf="!SelectedWitch" (click)="SelectCharacter('witch', true)" class="btn btn-primary notselected">
+        Select Witch
+    </button>
+    <button *ngIf="SelectedWitch" (click)="SelectCharacter('witch', false)" class="btn btn-primary selected">
+        Deselect Witch
+    </button>
+    <button *ngIf="!SelectedProphet" (click)="SelectCharacter('prophet', true)" class="btn btn-primary notselected">
+        Select Prophet
+    </button>
+    <button *ngIf="SelectedProphet" (click)="SelectCharacter('prophet', false)" class="btn btn-primary selected">
+        Deselect Prophet
+    </button>
+    <button *ngIf="!SelectedHunter" (click)="SelectCharacter('hunter', true)" class="btn btn-primary notselected">
+        Select Hunter
+    </button>
+    <button *ngIf="SelectedHunter" (click)="SelectCharacter('hunter', false)" class="btn btn-primary selected">
+        Deselect Hunter
+    </button>
+    <div class="btn btn-primary">
+        <label>Villagers: {{ VillagerCounter }}</label>
+        <button class="btn btn-primary selected" (click)="AddCharacter('villager', 1)">+</button>
+        <button class="btn btn-primary selected" (click)="AddCharacter('villager', -1)">-</button>
+    </div>
+    <div class="btn btn-primary">
+        <label>Wolves: {{ WolvesCounter }}</label>
+        <button class="btn btn-primary selected" (click)="AddCharacter('wolf', 1)">+</button>
+        <button class="btn btn-primary selected" (click)="AddCharacter('wolf', -1)">-</button>
+    </div>
+    <br/>
+    <button class="btn btn-primary selected">
+        <a routerLink="/play" routerLinkActive="active">Start Game!</a>
+    </button>
+
+</div>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
 <br/>
 
 <p>Witch player can choose following rules for Witch</p>
