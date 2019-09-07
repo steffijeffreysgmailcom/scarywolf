@@ -35,6 +35,23 @@
   <div class="">
     <label>Witch player can choose following rules for Witch</label>
     <br/>
+    <button class="btn btn-primary selected">
+        <a routerLink="/play" routerLinkActive="active">Start Game!</a>
+    </button>
+    <input
+        type="checkbox"
+        [checked]="isChecked"
+        (change)="isChecked = !isChecked"/>
+    <p>isChecked is {{ isChecked }} </p>
+</div>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+
+<p>Witch player can choose following rules for Witch</p>
 
     <input type="checkbox" id="firstnightressurgance" name="scales" checked ngModel="canRessuranceHerself">
     <label for="scales">Witch can use ressurgance on herself on first night</label>
