@@ -31,6 +31,9 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 I have moved into an angular project as you were worried uni wasn't teaching you enough frameworks.
 To run it do:
-npm install -g @angular/cli
-ng build
-ng serve
+
+`npm install -g @angular/cli@7.0.3`
+
+`ng build`
+
+`ng serve ` or `ng serve --open`
