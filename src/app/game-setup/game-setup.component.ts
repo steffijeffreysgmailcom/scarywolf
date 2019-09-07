@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { DataStore } from "../data-store/data-store.component";
+import {Component, OnInit} from '@angular/core';
+import {DataStore} from '../data-store/data-store.component';
 
 
 @Component({
@@ -13,14 +13,17 @@ export class GameSetupComponent implements OnInit {
   SelectedHunter: boolean = false;
   WolvesCounter: number = 0;
   VillagerCounter: number = 0;
+  canRessuranceHerself = false;
 
-  constructor(private data: DataStore) { }
+  constructor(private data: DataStore) {
+  }
+
   ngOnInit() {
     this.data.StoreCharacter('Greg');
   }
 
   SelectCharacter(character: string, selected: boolean) {
-    switch(character) {
+    switch (character) {
       case 'witch':
         this.SelectedWitch = selected;
         break;
@@ -34,7 +37,7 @@ export class GameSetupComponent implements OnInit {
   }
 
   AddCharacter(character: string, amount: number) {
-    switch(character) {
+    switch (character) {
       case 'wolf':
         this.WolvesCounter += amount;
         break;
