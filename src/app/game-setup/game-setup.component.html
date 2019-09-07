@@ -35,32 +35,19 @@
   <div class="">
     <label>Witch player can choose following rules for Witch</label>
     <br/>
-    <button class="btn btn-primary selected">
-        <a routerLink="/play" routerLinkActive="active">Start Game!</a>
-    </button>
-    <input
-        type="checkbox"
-        [checked]="isChecked"
-        (change)="isChecked = !isChecked"/>
-    <p>isChecked is {{ isChecked }} </p>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
 
-<p>Witch player can choose following rules for Witch</p>
-
-    <input type="checkbox" id="firstnightressurgance" name="scales" checked ngModel="canRessuranceHerself">
+    <input type="checkbox" [checked]="canRessuranceHerself" (change)="canRessuranceHerself = !canRessuranceHerself">
     <label for="scales">Witch can use ressurgance on herself on first night</label>
     <br/>
-    <input type="radio" name="gender" value="female" ng-model="uniqueSelection"> <label for="scales">Witch can
+    <label>canRessuranceHerself: {{canRessuranceHerself}}</label><br/>
+
+    <input type="radio" name="bothRessurgancePoisin" checked = checked (change)="bothRessurgancePoisin = !bothRessurgancePoisin"> <label for="scales">Witch cannot
     ressurgance and poisin on the same night</label> <br>
-    <input type="radio" name="gender" value="female" ng-model="uniqueSelection"> <label for="scales">Witch cannot
+    <input type="radio" name="bothRessurgancePoisin" (change)="bothRessurgancePoisin = !bothRessurgancePoisin"> <label for="scales">Witch can
     ressurgance and poisin on the same night</label> <br>
 
-  <label>{{canRessuranceHerself}}</label>
+
+    <label>bothRessurgancePoisin: {{bothRessurgancePoisin}}</label><br/>
   </div>
 
 
