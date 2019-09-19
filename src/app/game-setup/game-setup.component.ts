@@ -13,8 +13,8 @@ export class GameSetupComponent implements OnInit {
   SelectedHunter: boolean = false;
   WolvesCounter: number = 0;
   VillagerCounter: number = 0;
-  isChecked = false;
   canRessuranceHerself = false;
+  bothRessurgancePoisin = false;
 
   constructor(private data: DataStore) {
   }
