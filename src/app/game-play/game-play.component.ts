@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { DataStore } from "../data-store/data-store.component";
+import {Component, OnInit} from '@angular/core';
+import {Character, DataStore} from '../data-store/data-store.component';
 
 
 @Component({
@@ -8,15 +8,27 @@ import { DataStore } from "../data-store/data-store.component";
   styleUrls: ['./game-play.component.css']
 })
 export class GamePlayComponent implements OnInit {
-  player:String = "No idea";
-  constructor(private data: DataStore) { }
+  players: Array<Character>;
+  instruction = 'Everyone close your eyes; Wolves open your eyes';
+
+  constructor(private data: DataStore) {
+  }
+
   ngOnInit() {
-    this.player = this.data.GetCharacter();
+    this.players = this.data.GetAllCharacters();
+
+    // test
+    this.players[0].name = 'Chris';
+    this.SelectPersonToKill('Chris');
+  }
+
+  SelectPersonToKill(name: String) {
+    this.data.GetCharacterByName(name).killCharacter();
   }
 
   StartGame() {
     var audio = new Audio();
-    audio.src = "https://file-examples.com/wp-content/uploads/2017/11/file_example_MP3_700KB.mp3";
+    audio.src = 'https://file-examples.com/wp-content/uploads/2017/11/file_example_MP3_700KB.mp3';
     audio.load();
     audio.play();
   }

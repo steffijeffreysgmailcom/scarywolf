@@ -36,12 +36,17 @@
     <label>Witch player can choose following rules for Witch</label>
     <br/>
 
-    <input type="checkbox" [checked]="canRessuranceHerself" (change)="canRessuranceHerself = !canRessuranceHerself">
-    <label for="scales">Witch can use ressurgance on herself on first night</label>
-    <br/>
-    <label>canRessuranceHerself: {{canRessuranceHerself}}</label><br/>
+    <input type="radio" name="RessurganceWitch" checked=checked (change)="RessuranceWitchRule = RessuranceWitchRules.canRessuranceOnFirstNight">
+    <label for="scales">Witch can use ressurgance on herself on first night</label><br/>
+    <input type="radio" name="RessurganceWitch" (change)="RessuranceWitchRule = RessuranceWitchRules.canRessurance">
+    <label for="scales">Witch can ressurgance herself every night if still have ressurgance</label> <br/>
+    <input type="radio" name="RessurganceWitch" (change)="RessuranceWitchRule = RessuranceWitchRules.canNotRessurance">
+    <label for="scales">Witch can never ressurgance herself every night even still have ressurgance</label> <br/>
+    <label>RessuranceWitchRule: {{RessuranceWitchRule}}</label><br/>
 
-    <input type="radio" name="bothRessurgancePoisin" checked = checked (change)="bothRessurgancePoisin = !bothRessurgancePoisin"> <label for="scales">Witch cannot
+
+    <input type="radio" name="bothRessurgancePoisin" checked=checked (change)="bothRessurgancePoisin = !bothRessurgancePoisin"> <label for="scales">Witch
+    cannot
     ressurgance and poisin on the same night</label> <br>
     <input type="radio" name="bothRessurgancePoisin" (change)="bothRessurgancePoisin = !bothRessurgancePoisin"> <label for="scales">Witch can
     ressurgance and poisin on the same night</label> <br>
@@ -52,8 +57,9 @@
 
 
   <br/>
-  <button class="btn btn-primary selected">
-    <a routerLink="/play" routerLinkActive="active">Start Game!</a>
+  <p *ngIf="warning">{{ warning}}</p>
+  <button *ngIf="!warning" class="btn btn-primary selected">
+    <a routerLink="/play" routerLinkActive="active" (click)="StartGame()">Start Game!</a>
   </button>
 
 </div>
