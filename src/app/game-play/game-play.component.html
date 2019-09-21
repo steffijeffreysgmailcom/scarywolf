@@ -6,10 +6,26 @@
 <h2>{{players[0].name}}</h2>
 <h2>{{players[0].state}}</h2>
 <div class="row" class='pageContent'>
-    <button (click)="StartGame()" class="btn btn-primary selected">
+
+  <button *ngIf="currentState.statename==GameStateEnum.closeEyeTurn" (click)="StartGame(); SwitchTurn()" class="btn btn-primary selected">
         Start Game
-    </button>
-</div>
+  </button><br/>
+
+  <label>{{currentState.statename}}</label>
+
+  <div *ngIf="currentTurn.currentState==GameStateEnum.wolvesTurn">
+    <label>{{currentState.instruction}}</label>
+    <div *ngFor="let p of players">
+      <button (click)="SelectPersonToKill(p.name); SwitchTurn()">{{p.name}}</button>
+    </div>
+  </div>
+
+  <div *ngIf="currentTurn.currentState==GameStateEnum.wolvesTurn">
+    la
+  </div>
+
+
+  </div>
 <br/>
 <br/>
 <br/>

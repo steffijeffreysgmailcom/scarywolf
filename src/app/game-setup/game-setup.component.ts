@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {DataStore, Role, Character, Witch} from '../data-store/data-store.component';
+import {DataStore, Role, Character, Witch, GameState} from '../data-store/data-store.component';
 
 
 @Component({

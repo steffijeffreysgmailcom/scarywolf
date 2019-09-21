@@ -2,7 +2,6 @@ import {Component} from '@angular/core';
 import {Injectable} from '@angular/core';
 import {BehaviorSubject} from 'rxjs';
 
-
 export enum CharacterState {
   dead,
   alive,
@@ -34,6 +33,38 @@ export class Witch extends Character {
   }
 }
 
+export class GameState {
+  constructor(public statename: GameStateEnum, public instruction: String) {
+  }
+}
+
+export class GameStates {
+  public currentState = 0;
+  public states = [
+    new GameState(GameStateEnum.closeEyeTurn, 'Everyone close your eyes'),
+    new GameState(GameStateEnum.wolvesTurn, 'Wolves open your eyes'),
+    new GameState(GameStateEnum.witchTurn, 'blah blah'),
+    new GameState(GameStateEnum.prophetTurn, 'blah blah'),
+    new GameState(GameStateEnum.HunterTurn, 'blah blah'),
+  ];
+
+  NextState() {
+    this.currentState += 1;
+  }
+
+  CurrentState(): GameState {
+    return this.states[this.currentState];
+  }
+}
+
+export enum GameStateEnum {
+  closeEyeTurn,
+  wolvesTurn,
+  witchTurn,
+  prophetTurn,
+  HunterTurn
+}
+
 @Injectable()
 export class DataStore {
 
@@ -49,20 +80,14 @@ export class DataStore {
   }
 
   GetCharacterByName(name: String): Character {
-    // this.characters.forEach(function (character) {
-    //   // TODO: comparing string using ===?
-    //   if (character.name === name) {
-    //     return character;
-    //   }
-    // });
-
-    for (var i = 0; i < this.characters.length; i++) {
+    var character: Character = null;
+    this.characters.forEach((chara) => {
       // TODO: comparing string using ===?
-      if (this.characters[i].name === name) {
-        return this.characters[i];
+      if (chara.name === name) {
+        character = chara;
       }
-    }
-    return null;
+    });
+    return character;
   }
 
 }

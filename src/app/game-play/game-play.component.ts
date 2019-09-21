@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {Character, DataStore} from '../data-store/data-store.component';
+import {Character, DataStore, GameStateEnum, GameStates, GameState} from '../data-store/data-store.component';
 
 
 @Component({
@@ -8,18 +8,21 @@ import {Character, DataStore} from '../data-store/data-store.component';
   styleUrls: ['./game-play.component.css']
 })
 export class GamePlayComponent implements OnInit {
+  public GameStateEnum = GameStateEnum;
   players: Array<Character>;
-  instruction = 'Everyone close your eyes; Wolves open your eyes';
+  currentTurn: GameStates;
+  currentState: GameState;
 
   constructor(private data: DataStore) {
+    this.currentTurn = new GameStates();
+    this.currentState = this.currentTurn.CurrentState();
+    console.log(this.currentTurn);
+    console.log(this.currentState);
   }
 
   ngOnInit() {
+    console.log('here')
     this.players = this.data.GetAllCharacters();
-
-    // test
-    this.players[0].name = 'Chris';
-    this.SelectPersonToKill('Chris');
   }
 
   SelectPersonToKill(name: String) {
@@ -31,6 +34,11 @@ export class GamePlayComponent implements OnInit {
     audio.src = 'https://file-examples.com/wp-content/uploads/2017/11/file_example_MP3_700KB.mp3';
     audio.load();
     audio.play();
+  }
+
+  SwitchTurn() {
+    this.currentTurn.NextState();
+    this.currentState = this.currentTurn.CurrentState();
   }
 
 }
