@@ -1,4 +1,3 @@
-
 <h1>Scary wolf game</h1>
 <br/>
 <h2>PLAY</h2>
@@ -7,28 +6,32 @@
 <h2>{{players[0].state}}</h2>
 <div class="row" class='pageContent'>
 
-  <button *ngIf="currentState.statename==GameStateEnum.closeEyeTurn" (click)="StartGame(); SwitchTurn()" class="btn btn-primary selected">
-        Start Game
-  </button><br/>
+  <button *ngIf="currentTurn.CurrentState()==GameStateEnum.closeEyeTurn" (click)="StartGame(); SwitchTurn()" class="btn btn-primary selected">
+    Start Game
+  </button>
+  <br/>
 
-  <label>{{currentState.statename}}</label>
-
-  <div *ngIf="currentTurn.currentState==GameStateEnum.wolvesTurn">
-    <label>{{currentState.instruction}}</label>
+  <div *ngIf="currentTurn.CurrentState()==GameStateEnum.wolvesTurn">
+    <label>{{currentTurn.CurrentInstruction()}}</label>
     <div *ngFor="let p of players">
       <button (click)="SelectPersonToKill(p.name); SwitchTurn()">{{p.name}}</button>
     </div>
   </div>
 
-  <div *ngIf="currentTurn.currentState==GameStateEnum.wolvesTurn">
-    la
+  <div *ngIf="currentTurn.currentState==GameStateEnum.witchTurn">
+    lalala
   </div>
 
-
+  <div *ngIf="currentTurn.currentState==GameStateEnum.prophetTurn">
+    lalala
   </div>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
+
+  <div *ngIf="currentTurn.currentState==GameStateEnum.HunterTurn">
+    lalala
+  </div>
+
+  <label>test: {{currentTurn.CurrentState()}}</label><br>
+  <label>test: {{currentTurn.CurrentInstruction()}}</label><br>
+
+
+</div>

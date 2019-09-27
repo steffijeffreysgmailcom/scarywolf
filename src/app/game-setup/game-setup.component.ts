@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {DataStore, Role, Character, Witch, GameState} from '../data-store/data-store.component';
+import {DataStore, Role, Character, Witch} from '../data-store/data-store.component';
 
 
 @Component({
@@ -93,10 +93,10 @@ export class GameSetupComponent implements OnInit {
   }
 
   makeid(length) {
-    var result = '';
-    var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    var charactersLength = characters.length;
-    for (var i = 0; i < length; i++) {
+    let result = '';
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    const charactersLength = characters.length;
+    for (let i = 0; i < length; i++) {
       result += characters.charAt(Math.floor(Math.random() * charactersLength));
     }
     return result;

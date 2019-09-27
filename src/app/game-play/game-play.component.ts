@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {Character, DataStore, GameStateEnum, GameStates, GameState} from '../data-store/data-store.component';
+import {Character, DataStore, GameInstructionEnum, GameState, GameStateEnum} from '../data-store/data-store.component';
 
 
 @Component({
@@ -8,20 +8,16 @@ import {Character, DataStore, GameStateEnum, GameStates, GameState} from '../dat
   styleUrls: ['./game-play.component.css']
 })
 export class GamePlayComponent implements OnInit {
-  public GameStateEnum = GameStateEnum;
+  GameInstructionEnum = GameInstructionEnum;
+  GameStateEnum = GameStateEnum;
   players: Array<Character>;
-  currentTurn: GameStates;
-  currentState: GameState;
+  currentTurn = new GameState();
 
   constructor(private data: DataStore) {
-    this.currentTurn = new GameStates();
-    this.currentState = this.currentTurn.CurrentState();
-    console.log(this.currentTurn);
-    console.log(this.currentState);
   }
 
   ngOnInit() {
-    console.log('here')
+    console.log('here');
     this.players = this.data.GetAllCharacters();
   }
 
@@ -30,7 +26,7 @@ export class GamePlayComponent implements OnInit {
   }
 
   StartGame() {
-    var audio = new Audio();
+    const audio = new Audio();
     audio.src = 'https://file-examples.com/wp-content/uploads/2017/11/file_example_MP3_700KB.mp3';
     audio.load();
     audio.play();
@@ -38,7 +34,6 @@ export class GamePlayComponent implements OnInit {
 
   SwitchTurn() {
     this.currentTurn.NextState();
-    this.currentState = this.currentTurn.CurrentState();
   }
 
 }

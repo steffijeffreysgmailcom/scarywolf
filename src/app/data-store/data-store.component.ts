@@ -34,35 +34,36 @@ export class Witch extends Character {
 }
 
 export class GameState {
-  constructor(public statename: GameStateEnum, public instruction: String) {
-  }
-}
 
-export class GameStates {
-  public currentState = 0;
-  public states = [
-    new GameState(GameStateEnum.closeEyeTurn, 'Everyone close your eyes'),
-    new GameState(GameStateEnum.wolvesTurn, 'Wolves open your eyes'),
-    new GameState(GameStateEnum.witchTurn, 'blah blah'),
-    new GameState(GameStateEnum.prophetTurn, 'blah blah'),
-    new GameState(GameStateEnum.HunterTurn, 'blah blah'),
-  ];
+  currentState = GameStateEnum.closeEyeTurn;
 
   NextState() {
     this.currentState += 1;
   }
 
-  CurrentState(): GameState {
-    return this.states[this.currentState];
+  CurrentState() {
+    return this.currentState;
+  }
+
+  CurrentInstruction() {
+    return GameInstructionEnum[GameStateEnum[this.currentState]];
   }
 }
 
+export enum GameInstructionEnum {
+  'closeEyeTurn' = 'Everyone close your eyes',
+  'wolvesTurn' = 'Wolves open your eyes',
+  'witchTurn' = 'Wolves close your eyes, Witch open your eyes',
+  'prophetTurn' = 'Witch close your eyes, Prophet open your eyes',
+  'HunterTurn' = 'Prophet close your eyes, Hunter open your eyes'
+}
+
 export enum GameStateEnum {
-  closeEyeTurn,
-  wolvesTurn,
-  witchTurn,
-  prophetTurn,
-  HunterTurn
+  'closeEyeTurn',
+  'wolvesTurn',
+  'witchTurn',
+  'prophetTurn',
+  'HunterTurn'
 }
 
 @Injectable()
