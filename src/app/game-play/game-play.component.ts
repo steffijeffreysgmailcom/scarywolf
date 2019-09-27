@@ -8,8 +8,9 @@ import {Character} from '../data-store/character.component';
   styleUrls: ['./game-play.component.css']
 })
 export class GamePlayComponent implements OnInit {
-  GameInstructionEnum = GameInstructionEnum;
+
   GameStateEnum = GameStateEnum;
+
   players: Array<Character>;
   currentTurn = new GameState();
 

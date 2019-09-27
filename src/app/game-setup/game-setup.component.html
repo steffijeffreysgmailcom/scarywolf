@@ -36,22 +36,22 @@
     <label>Witch player can choose following rules for Witch</label>
     <br/>
 
-    <input type="radio" name="RescueWitch" checked=checked (change)="defaultRescueWitchRule = RescueWitchRules.canRescueOnFirstNight">
+    <input type="radio" name="RescueWitch" checked=checked (change)="CurrentRescueWitchRule = RescueWitchRules.canRescueOnFirstNight">
     <label for="scales">Witch can use rescue on herself on first night</label><br/>
-    <input type="radio" name="RescueWitch" (change)="defaultRescueWitchRule = RescueWitchRules.canRescue">
+    <input type="radio" name="RescueWitch" (change)="CurrentRescueWitchRule = RescueWitchRules.canRescue">
     <label for="scales">Witch can rescue herself at night if still have the Rescue ability</label> <br/>
-    <input type="radio" name="RescueWitch" (change)="defaultRescueWitchRule = RescueWitchRules.canNotRescue">
+    <input type="radio" name="RescueWitch" (change)="CurrentRescueWitchRule = RescueWitchRules.canNotRescue">
     <label for="scales">Witch can never rescue herself</label> <br/>
 
-    <label>defaultRescueWitchRule: {{defaultRescueWitchRule}}</label><br/>
+    <label>CurrentRescueWitchRule: {{CurrentRescueWitchRule}}</label><br/>
 
 
-    <input type="radio" name="bothRescuePoison" checked=checked (change)="bothRescuePoison = !bothRescuePoison">
+    <input type="radio" name="bothRescuePoison" checked=checked (change)="BothRescuePoison = !BothRescuePoison">
     <label for="scales">Witch cannot Rescue and poison on the same night</label> <br>
-    <input type="radio" name="bothRescuePoison" (change)="bothRescuePoison = !bothRescuePoison">
+    <input type="radio" name="bothRescuePoison" (change)="BothRescuePoison = !BothRescuePoison">
     <label for="scales">Witch can Rescue and poison on the same night</label> <br>
 
-    <label>Poison: {{bothRescuePoison}}</label><br/>
+    <label>Poison: {{BothRescuePoison}}</label><br/>
   </div>
 
 

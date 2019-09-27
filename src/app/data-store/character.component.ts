@@ -1,5 +1,6 @@
 import {Component} from '@angular/core';
 import {Role} from './data-store.component';
+import {RescueWitchRules} from './role.component';
 
 export class Character {
 
@@ -20,7 +21,7 @@ export enum CharacterState {
 
 export class Witch extends Character {
 
-  constructor(public name: String, public role: Role, public RescueWitchRule: String, bothRescuePoison: boolean) {
+  constructor(public name: String, public role: Role, public RescueWitchRule: RescueWitchRules, bothRescuePoison: boolean) {
     super(name, role);
   }
 }

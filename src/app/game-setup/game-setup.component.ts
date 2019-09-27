@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {DataStore, Role} from '../data-store/data-store.component';
 import {Character, Witch} from '../data-store/character.component';
+import {RescueWitchRules} from '../data-store/role.component';
 
 @Component({
   selector: 'game-setup',
@@ -8,18 +9,16 @@ import {Character, Witch} from '../data-store/character.component';
   styleUrls: ['./game-setup.component.css']
 })
 export class GameSetupComponent implements OnInit {
+
+  RescueWitchRules = RescueWitchRules;
+
   SelectedWitch = true;
   SelectedProphet = true;
   SelectedHunter = true;
   WolvesCounter = 3;
   VillagerCounter = 3;
-  RescueWitchRules = {
-    canRescue: 'canRescue',
-    canNotRescue: 'canNotRescue',
-    canRescueOnFirstNight: 'canRescueOnFirstNight'
-  };
-  defaultRescueWitchRule = this.RescueWitchRules.canRescueOnFirstNight;
-  bothRescuePoison = false;
+  CurrentRescueWitchRule = RescueWitchRules.canRescueOnFirstNight;
+  BothRescuePoison = false;
   warning: String = '';
 
   constructor(private data: DataStore) {
@@ -81,7 +80,7 @@ export class GameSetupComponent implements OnInit {
       this.data.StoreCharacter(new Character(this.makeid(2), Role.Wolf));
     }
     if (this.SelectedWitch) {
-      this.data.StoreCharacter(new Witch(this.makeid(2), Role.Witch, this.defaultRescueWitchRule, this.bothRescuePoison));
+      this.data.StoreCharacter(new Witch(this.makeid(2), Role.Witch, this.CurrentRescueWitchRule, this.BothRescuePoison));
     }
     if (this.SelectedHunter) {
       this.data.StoreCharacter(new Character(this.makeid(2), Role.Hunter));
