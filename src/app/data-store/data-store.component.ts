@@ -1,11 +1,7 @@
 import {Component} from '@angular/core';
 import {Injectable} from '@angular/core';
 import {BehaviorSubject} from 'rxjs';
-
-export enum CharacterState {
-  dead,
-  alive,
-}
+import {Character} from './character.component';
 
 export enum Role {
   Villager,
@@ -13,24 +9,6 @@ export enum Role {
   Witch,
   Prophet,
   Hunter
-}
-
-export class Character {
-  state: CharacterState = CharacterState.alive;
-
-  constructor(public name: String, public role: Role) {
-  }
-
-  killCharacter() {
-    this.state = CharacterState.dead;
-  }
-}
-
-export class Witch extends Character {
-
-  constructor(public name: String, public role: Role, public RessuranceWitchRule: String, bothRessurgancePoisin: boolean) {
-    super(name, role);
-  }
 }
 
 export class GameState {
@@ -81,7 +59,7 @@ export class DataStore {
   }
 
   GetCharacterByName(name: String): Character {
-    var character: Character = null;
+    let character: Character = null;
     this.characters.forEach((chara) => {
       // TODO: comparing string using ===?
       if (chara.name === name) {

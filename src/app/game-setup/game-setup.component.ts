@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {DataStore, Role, Character, Witch} from '../data-store/data-store.component';
-
+import {DataStore, Role} from '../data-store/data-store.component';
+import {Character, Witch} from '../data-store/character.component';
 
 @Component({
   selector: 'game-setup',
@@ -74,10 +74,10 @@ export class GameSetupComponent implements OnInit {
 
   StartGame() {
     console.log(':D');
-    for (var i = 0; i < this.VillagerCounter; i++) {
+    for (let i = 0; i < this.VillagerCounter; i++) {
       this.data.StoreCharacter(new Character(this.makeid(2), Role.Villager));
     }
-    for (var i = 0; i < this.WolvesCounter; i++) {
+    for (let i = 0; i < this.WolvesCounter; i++) {
       this.data.StoreCharacter(new Character(this.makeid(2), Role.Wolf));
     }
     if (this.SelectedWitch) {

@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {Character, DataStore, GameInstructionEnum, GameState, GameStateEnum} from '../data-store/data-store.component';
-
+import {DataStore, GameInstructionEnum, GameState, GameStateEnum} from '../data-store/data-store.component';
+import {Character} from '../data-store/character.component';
 
 @Component({
   selector: 'game-play',
