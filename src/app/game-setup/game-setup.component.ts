@@ -13,13 +13,13 @@ export class GameSetupComponent implements OnInit {
   SelectedHunter = true;
   WolvesCounter = 3;
   VillagerCounter = 3;
-  RessuranceWitchRules = {
-    canRessurance: 'canRessurance',
-    canNotRessurance: 'canNotRessurance',
-    canRessuranceOnFirstNight: 'canRessuranceOnFirstNight'
+  RescueWitchRules = {
+    canRescue: 'canRescue',
+    canNotRescue: 'canNotRescue',
+    canRescueOnFirstNight: 'canRescueOnFirstNight'
   };
-  RessuranceWitchRule = this.RessuranceWitchRules.canRessuranceOnFirstNight;
-  bothRessurgancePoisin = false;
+  defaultRescueWitchRule = this.RescueWitchRules.canRescueOnFirstNight;
+  bothRescuePoison = false;
   warning: String = '';
 
   constructor(private data: DataStore) {
@@ -81,7 +81,7 @@ export class GameSetupComponent implements OnInit {
       this.data.StoreCharacter(new Character(this.makeid(2), Role.Wolf));
     }
     if (this.SelectedWitch) {
-      this.data.StoreCharacter(new Witch(this.makeid(2), Role.Witch, this.RessuranceWitchRule, this.bothRessurgancePoisin));
+      this.data.StoreCharacter(new Witch(this.makeid(2), Role.Witch, this.defaultRescueWitchRule, this.bothRescuePoison));
     }
     if (this.SelectedHunter) {
       this.data.StoreCharacter(new Character(this.makeid(2), Role.Hunter));

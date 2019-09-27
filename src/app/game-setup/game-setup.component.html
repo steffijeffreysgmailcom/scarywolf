@@ -36,23 +36,22 @@
     <label>Witch player can choose following rules for Witch</label>
     <br/>
 
-    <input type="radio" name="RessurganceWitch" checked=checked (change)="RessuranceWitchRule = RessuranceWitchRules.canRessuranceOnFirstNight">
-    <label for="scales">Witch can use ressurgance on herself on first night</label><br/>
-    <input type="radio" name="RessurganceWitch" (change)="RessuranceWitchRule = RessuranceWitchRules.canRessurance">
-    <label for="scales">Witch can ressurgance herself every night if still have ressurgance</label> <br/>
-    <input type="radio" name="RessurganceWitch" (change)="RessuranceWitchRule = RessuranceWitchRules.canNotRessurance">
-    <label for="scales">Witch can never ressurgance herself every night even still have ressurgance</label> <br/>
-    <label>RessuranceWitchRule: {{RessuranceWitchRule}}</label><br/>
+    <input type="radio" name="RescueWitch" checked=checked (change)="defaultRescueWitchRule = RescueWitchRules.canRescueOnFirstNight">
+    <label for="scales">Witch can use rescue on herself on first night</label><br/>
+    <input type="radio" name="RescueWitch" (change)="defaultRescueWitchRule = RescueWitchRules.canRescue">
+    <label for="scales">Witch can rescue herself at night if still have the Rescue ability</label> <br/>
+    <input type="radio" name="RescueWitch" (change)="defaultRescueWitchRule = RescueWitchRules.canNotRescue">
+    <label for="scales">Witch can never rescue herself</label> <br/>
+
+    <label>defaultRescueWitchRule: {{defaultRescueWitchRule}}</label><br/>
 
 
-    <input type="radio" name="bothRessurgancePoisin" checked=checked (change)="bothRessurgancePoisin = !bothRessurgancePoisin"> <label for="scales">Witch
-    cannot
-    ressurgance and poisin on the same night</label> <br>
-    <input type="radio" name="bothRessurgancePoisin" (change)="bothRessurgancePoisin = !bothRessurgancePoisin"> <label for="scales">Witch can
-    ressurgance and poisin on the same night</label> <br>
+    <input type="radio" name="bothRescuePoison" checked=checked (change)="bothRescuePoison = !bothRescuePoison">
+    <label for="scales">Witch cannot Rescue and poison on the same night</label> <br>
+    <input type="radio" name="bothRescuePoison" (change)="bothRescuePoison = !bothRescuePoison">
+    <label for="scales">Witch can Rescue and poison on the same night</label> <br>
 
-
-    <label>bothRessurgancePoisin: {{bothRessurgancePoisin}}</label><br/>
+    <label>Poison: {{bothRescuePoison}}</label><br/>
   </div>
 
 
