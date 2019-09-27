@@ -1,6 +1,4 @@
-import {Component} from '@angular/core';
-import {Role} from './data-store.component';
-import {RescueWitchRules} from './role.component';
+import {RescueWitchRules, Role} from './role.component';
 
 export class Character {
 

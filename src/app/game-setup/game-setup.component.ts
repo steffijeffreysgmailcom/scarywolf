@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {DataStore, Role} from '../data-store/data-store.component';
+import {DataStore} from '../data-store/data-store.component';
 import {Character, Witch} from '../data-store/character.component';
-import {RescueWitchRules} from '../data-store/role.component';
+import {RescueWitchRules, Role} from '../data-store/role.component';
 
 @Component({
   selector: 'game-setup',
@@ -11,6 +11,7 @@ import {RescueWitchRules} from '../data-store/role.component';
 export class GameSetupComponent implements OnInit {
 
   RescueWitchRules = RescueWitchRules;
+  Role = Role;
 
   SelectedWitch = true;
   SelectedProphet = true;
@@ -28,27 +29,27 @@ export class GameSetupComponent implements OnInit {
     // this.data.StoreCharacter('Greg');
   }
 
-  SelectCharacter(character: string, selected: boolean) {
-    switch (character) {
-      case 'witch':
+  SelectRole(role: Role, selected: boolean) {
+    switch (role) {
+      case Role.Witch:
         this.SelectedWitch = selected;
         break;
-      case 'prophet':
+      case Role.Prophet:
         this.SelectedProphet = selected;
         break;
-      case 'hunter':
+      case Role.Hunter:
         this.SelectedHunter = selected;
         break;
     }
     this.ValidateGame();
   }
 
-  AddCharacter(character: string, amount: number) {
-    switch (character) {
-      case 'wolf':
+  AddRole(role: Role, amount: number) {
+    switch (role) {
+      case Role.Wolf:
         this.WolvesCounter += amount;
         break;
-      case 'villager':
+      case Role.Villager:
         this.VillagerCounter += amount;
         break;
     }
@@ -62,7 +63,6 @@ export class GameSetupComponent implements OnInit {
     if (this.WolvesCounter < 0) {
       this.WolvesCounter = 0;
     }
-
     if (this.VillagerCounter > 0 || this.WolvesCounter > 0 || this.SelectedWitch || this.SelectedHunter || this.SelectedProphet) {
       this.warning = '';
       return true;
@@ -88,7 +88,7 @@ export class GameSetupComponent implements OnInit {
     if (this.SelectedProphet) {
       this.data.StoreCharacter(new Character(this.makeid(2), Role.Prophet));
     }
-
+    console.log(this.data.GetAllCharacters());
   }
 
   makeid(length) {

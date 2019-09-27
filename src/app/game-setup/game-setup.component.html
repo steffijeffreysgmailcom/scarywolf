@@ -3,33 +3,33 @@
 
 <div class="row" class='pageContent'>
 
-  <button *ngIf="!SelectedWitch" (click)="SelectCharacter('witch', true)" class="btn btn-primary notselected">
+  <button *ngIf="!SelectedWitch" (click)="SelectRole(Role.Witch, true)" class="btn btn-primary notselected">
     Select Witch
   </button>
-  <button *ngIf="SelectedWitch" (click)="SelectCharacter('witch', false)" class="btn btn-primary selected">
+  <button *ngIf="SelectedWitch" (click)="SelectRole(Role.Witch, false)" class="btn btn-primary selected">
     Deselect Witch
   </button>
-  <button *ngIf="!SelectedProphet" (click)="SelectCharacter('prophet', true)" class="btn btn-primary notselected">
+  <button *ngIf="!SelectedProphet" (click)="SelectRole(Role.Prophet, true)" class="btn btn-primary notselected">
     Select Prophet
   </button>
-  <button *ngIf="SelectedProphet" (click)="SelectCharacter('prophet', false)" class="btn btn-primary selected">
+  <button *ngIf="SelectedProphet" (click)="SelectRole(Role.Prophet, false)" class="btn btn-primary selected">
     Deselect Prophet
   </button>
-  <button *ngIf="!SelectedHunter" (click)="SelectCharacter('hunter', true)" class="btn btn-primary notselected">
+  <button *ngIf="!SelectedHunter" (click)="SelectRole(Role.Hunter, true)" class="btn btn-primary notselected">
     Select Hunter
   </button>
-  <button *ngIf="SelectedHunter" (click)="SelectCharacter('hunter', false)" class="btn btn-primary selected">
+  <button *ngIf="SelectedHunter" (click)="SelectRole(Role.Hunter, false)" class="btn btn-primary selected">
     Deselect Hunter
   </button>
   <div class="btn btn-primary">
     <label>Villagers: {{ VillagerCounter }}</label>
-    <button class="btn btn-primary selected" (click)="AddCharacter('villager', 1)">+</button>
-    <button class="btn btn-primary selected" (click)="AddCharacter('villager', -1)">-</button>
+    <button class="btn btn-primary selected" (click)="AddRole(Role.Villager, 1)">+</button>
+    <button class="btn btn-primary selected" (click)="AddRole(Role.Villager, -1)">-</button>
   </div>
   <div class="btn btn-primary">
     <label>Wolves: {{ WolvesCounter }}</label>
-    <button class="btn btn-primary selected" (click)="AddCharacter('wolf', 1)">+</button>
-    <button class="btn btn-primary selected" (click)="AddCharacter('wolf', -1)">-</button>
+    <button class="btn btn-primary selected" (click)="AddRole(Role.Wolf, 1)">+</button>
+    <button class="btn btn-primary selected" (click)="AddRole(Role.Wolf, -1)">-</button>
   </div>
   <br/>
   <div class="">
@@ -51,7 +51,7 @@
     <input type="radio" name="bothRescuePoison" (change)="BothRescuePoison = !BothRescuePoison">
     <label for="scales">Witch can Rescue and poison on the same night</label> <br>
 
-    <label>Poison: {{BothRescuePoison}}</label><br/>
+    <label>BothRescuePoison: {{BothRescuePoison}}</label><br/>
   </div>
 
 

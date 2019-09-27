@@ -1,5 +1,12 @@
 import {Component} from '@angular/core';
-import {Role} from './data-store.component';
+
+export enum Role {
+  Villager,
+  Wolf,
+  Witch,
+  Prophet,
+  Hunter
+}
 
 export enum RescueWitchRules {
   canRescue = 'canRescue',

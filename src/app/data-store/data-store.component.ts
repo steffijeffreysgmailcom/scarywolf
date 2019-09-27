@@ -3,14 +3,6 @@ import {Injectable} from '@angular/core';
 import {BehaviorSubject} from 'rxjs';
 import {Character} from './character.component';
 
-export enum Role {
-  Villager,
-  Wolf,
-  Witch,
-  Prophet,
-  Hunter
-}
-
 export class GameState {
 
   currentState = GameStateEnum.closeEyeTurn;
@@ -51,7 +43,6 @@ export class DataStore {
 
   StoreCharacter(character: Character) {
     this.characters.push(character);
-    console.log('create');
   }
 
   GetAllCharacters(): Array<Character> {
