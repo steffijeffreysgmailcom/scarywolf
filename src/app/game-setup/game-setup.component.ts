@@ -29,16 +29,16 @@ export class GameSetupComponent implements OnInit {
     // this.data.StoreCharacter('Greg');
   }
 
-  SelectRole(role: Role, selected: boolean) {
+  SelectRole(role: Role) {
     switch (role) {
       case Role.Witch:
-        this.SelectedWitch = selected;
+        this.SelectedWitch = !this.SelectedWitch;
         break;
       case Role.Prophet:
-        this.SelectedProphet = selected;
+        this.SelectedProphet = !this.SelectedProphet;
         break;
       case Role.Hunter:
-        this.SelectedHunter = selected;
+        this.SelectedHunter = !this.SelectedHunter;
         break;
     }
     this.ValidateGame();

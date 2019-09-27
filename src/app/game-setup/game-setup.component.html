@@ -3,22 +3,22 @@
 
 <div class="row" class='pageContent'>
 
-  <button *ngIf="!SelectedWitch" (click)="SelectRole(Role.Witch, true)" class="btn btn-primary notselected">
+  <button *ngIf="!SelectedWitch" (click)="SelectRole(Role.Witch)" class="btn btn-primary notselected">
     Select Witch
   </button>
-  <button *ngIf="SelectedWitch" (click)="SelectRole(Role.Witch, false)" class="btn btn-primary selected">
+  <button *ngIf="SelectedWitch" (click)="SelectRole(Role.Witch)" class="btn btn-primary selected">
     Deselect Witch
   </button>
-  <button *ngIf="!SelectedProphet" (click)="SelectRole(Role.Prophet, true)" class="btn btn-primary notselected">
+  <button *ngIf="!SelectedProphet" (click)="SelectRole(Role.Prophet)" class="btn btn-primary notselected">
     Select Prophet
   </button>
-  <button *ngIf="SelectedProphet" (click)="SelectRole(Role.Prophet, false)" class="btn btn-primary selected">
+  <button *ngIf="SelectedProphet" (click)="SelectRole(Role.Prophet)" class="btn btn-primary selected">
     Deselect Prophet
   </button>
-  <button *ngIf="!SelectedHunter" (click)="SelectRole(Role.Hunter, true)" class="btn btn-primary notselected">
+  <button *ngIf="!SelectedHunter" (click)="SelectRole(Role.Hunter)" class="btn btn-primary notselected">
     Select Hunter
   </button>
-  <button *ngIf="SelectedHunter" (click)="SelectRole(Role.Hunter, false)" class="btn btn-primary selected">
+  <button *ngIf="SelectedHunter" (click)="SelectRole(Role.Hunter)" class="btn btn-primary selected">
     Deselect Hunter
   </button>
   <div class="btn btn-primary">
