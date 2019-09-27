@@ -2,8 +2,6 @@
 <br/>
 <h2>PLAY</h2>
 
-<h2>{{players[0].name}}</h2>
-<h2>{{players[0].state}}</h2>
 <div class="row" class='pageContent'>
 
   <button *ngIf="currentTurn.CurrentState()==GameStateEnum.closeEyeTurn" (click)="StartGame(); SwitchTurn()" class="btn btn-primary selected">
@@ -19,7 +17,12 @@
   </div>
 
   <div *ngIf="currentTurn.currentState==GameStateEnum.witchTurn">
-    lalala
+    <label>{{currentTurn.CurrentInstruction()}}</label>
+<!--    if witch have ability to rescue-->
+<!--    <label *ngIf=""-->
+<!--    <div *ngFor="let p of players">-->
+<!--      <button (click)="SelectPersonToKill(p.name); SwitchTurn()">{{p.name}}</button>-->
+<!--    </div>-->
   </div>
 
   <div *ngIf="currentTurn.currentState==GameStateEnum.prophetTurn">

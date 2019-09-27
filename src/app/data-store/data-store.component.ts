@@ -1,10 +1,9 @@
-import {Component} from '@angular/core';
 import {Injectable} from '@angular/core';
-import {BehaviorSubject} from 'rxjs';
 import {Character} from './character.component';
 
 export class GameState {
 
+  night = 1; // TODO: figure out how to increase night later
   currentState = GameStateEnum.closeEyeTurn;
 
   NextState() {
@@ -17,6 +16,10 @@ export class GameState {
 
   CurrentInstruction() {
     return GameInstructionEnum[GameStateEnum[this.currentState]];
+  }
+
+  CurrentNight() {
+    return this.night;
   }
 }
 
