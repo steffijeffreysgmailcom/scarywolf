@@ -1,26 +1,26 @@
 import {Injectable} from '@angular/core';
 import {Character} from './character.component';
+import {Role} from './role.component';
 
 export class GameState {
 
-  night = 1; // TODO: figure out how to increase night later
+  currentNight = 1; // TODO: figure out how to increase currentNight later
   currentState = GameStateEnum.closeEyeTurn;
+  characterKilledTonight: Character = null;
+  characterPoisonedTonight: Character = null;
 
   NextState() {
     this.currentState += 1;
-  }
-
-  CurrentState() {
-    return this.currentState;
   }
 
   CurrentInstruction() {
     return GameInstructionEnum[GameStateEnum[this.currentState]];
   }
 
-  CurrentNight() {
-    return this.night;
+  SetCharacterKilledTonight(characterKilled: Character) {
+    this.characterKilledTonight = characterKilled;
   }
+
 }
 
 export enum GameInstructionEnum {

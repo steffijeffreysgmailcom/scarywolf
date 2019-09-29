@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {DataStore, GameState, GameStateEnum} from '../data-store/data-store.component';
-import {Character} from '../data-store/character.component';
+import {Character, Witch} from '../data-store/character.component';
+import {Role} from '../data-store/role.component';
 
 @Component({
   selector: 'game-play',
@@ -23,7 +24,9 @@ export class GamePlayComponent implements OnInit {
   }
 
   SelectPersonToKill(name: String) {
-    this.data.GetCharacterByName(name).killCharacter();
+    const characterKilled = this.data.GetCharacterByName(name);
+    characterKilled.killCharacter();
+    this.currentTurn.SetCharacterKilledTonight(characterKilled);
   }
 
   StartGame() {

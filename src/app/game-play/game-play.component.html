@@ -4,12 +4,12 @@
 
 <div class="row" class='pageContent'>
 
-  <button *ngIf="currentTurn.CurrentState()==GameStateEnum.closeEyeTurn" (click)="StartGame(); SwitchTurn()" class="btn btn-primary selected">
+  <button *ngIf="currentTurn.currentState==GameStateEnum.closeEyeTurn" (click)="StartGame(); SwitchTurn()" class="btn btn-primary selected">
     Start Game
   </button>
   <br/>
 
-  <div *ngIf="currentTurn.CurrentState()==GameStateEnum.wolvesTurn">
+  <div *ngIf="currentTurn.currentState==GameStateEnum.wolvesTurn">
     <label>{{currentTurn.CurrentInstruction()}}</label>
     <div *ngFor="let p of players">
       <button (click)="SelectPersonToKill(p.name); SwitchTurn()">{{p.name}}</button>
@@ -17,7 +17,6 @@
   </div>
 
   <div *ngIf="currentTurn.currentState==GameStateEnum.witchTurn">
-    <label>{{currentTurn.CurrentInstruction()}}</label>
 <!--    if witch have ability to rescue-->
 <!--    <label *ngIf=""-->
 <!--    <div *ngFor="let p of players">-->
@@ -33,7 +32,7 @@
     lalala
   </div>
 
-  <label>test: {{currentTurn.CurrentState()}}</label><br>
+  <label>test: {{currentTurn.currentState}}</label><br>
   <label>test: {{currentTurn.CurrentInstruction()}}</label><br>
 
 
