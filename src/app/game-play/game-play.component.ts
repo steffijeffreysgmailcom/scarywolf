@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {DataStore, GameState, GameStateEnum} from '../data-store/data-store.component';
-import {Character, CharacterState, Witch} from '../data-store/character.component';
+import {DataStore} from '../data-store/data-store.component';
+import {GameState, GameStateEnum} from '../data-store/gameState.component';
+import {Character, CharacterState} from '../data-store/character/character.component';
+import {Witch} from '../data-store/character/witch.component';
 import {Role} from '../data-store/role.component';
 
 @Component({
@@ -41,8 +43,8 @@ export class GamePlayComponent implements OnInit {
   StartGame() {
     const audio = new Audio();
     audio.src = 'https://file-examples.com/wp-content/uploads/2017/11/file_example_MP3_700KB.mp3';
-    audio.load();
-    audio.play();
+    // audio.load();
+    // audio.play();
   }
 
   SwitchTurn() {
