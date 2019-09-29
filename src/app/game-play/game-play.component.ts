@@ -28,7 +28,7 @@ export class GamePlayComponent implements OnInit {
 
   KillCharacterByName(name: String) {
     const characterKilled = this.data.GetCharacterByName(name);
-    const wolf = this.GetWolves()[0].Kill(characterKilled);
+    this.GetWolves()[0].Kill(characterKilled);
     this.currentTurn.SetCharacterKilledTonight(characterKilled);
   }
 

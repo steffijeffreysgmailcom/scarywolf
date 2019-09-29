@@ -1,4 +1,4 @@
-import {RescueWitchRules, Role} from '../role.component';
+import {Role} from '../role.component';
 import {Character, CharacterState} from './character.component';
 
 export class Wolf extends Character {
