@@ -40,4 +40,8 @@ export class GamePlayComponent implements OnInit {
     this.currentTurn.NextState();
   }
 
+  GetWitch() {
+    return this.data.GetCharactersByRole(Role.Witch)[0] as Witch;
+  }
+
 }

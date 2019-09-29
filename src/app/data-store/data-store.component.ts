@@ -63,4 +63,14 @@ export class DataStore {
     return character;
   }
 
+  GetCharactersByRole(role: Role): Array<Character> {
+    const characters = [];
+    this.characters.forEach((chara) => {
+      // TODO: comparing string using ===?
+      if (chara.role === role) {
+        characters.push(chara);
+      }
+    });
+    return characters;
+  }
 }
