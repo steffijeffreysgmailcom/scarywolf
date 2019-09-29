@@ -88,7 +88,6 @@ export class GameSetupComponent implements OnInit {
     if (this.SelectedProphet) {
       this.data.StoreCharacter(new Character(this.makeid(2), Role.Prophet));
     }
-    console.log(this.data.GetAllCharacters());
   }
 
   makeid(length) {

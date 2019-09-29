@@ -4,7 +4,8 @@
 
 <div class="row" class='pageContent'>
 
-  <button *ngIf="currentTurn.currentState==GameStateEnum.closeEyeTurn" (click)="StartGame(); SwitchTurn()" class="btn btn-primary selected">
+  <button *ngIf="currentTurn.currentState==GameStateEnum.closeEyeTurn" (click)="StartGame(); SwitchTurn()"
+          class="btn btn-primary selected">
     Start Game
   </button>
   <br/>
@@ -12,16 +13,30 @@
   <div *ngIf="currentTurn.currentState==GameStateEnum.wolvesTurn">
     <label>{{currentTurn.CurrentInstruction()}}</label>
     <div *ngFor="let p of players">
-      <button (click)="SelectPersonToKill(p.name); SwitchTurn()">{{p.name}}</button>
+      <button (click)="KillCharacterByName(p.name); SwitchTurn()">{{p.name}}</button>
     </div>
   </div>
 
   <div *ngIf="currentTurn.currentState==GameStateEnum.witchTurn">
-<!--    if witch have ability to rescue-->
-<!--    <label *ngIf=""-->
-<!--    <div *ngFor="let p of players">-->
-<!--      <button (click)="SelectPersonToKill(p.name); SwitchTurn()">{{p.name}}</button>-->
-<!--    </div>-->
+    <label>{{currentTurn.CurrentInstruction()}}</label><br/>
+
+    <label *ngIf="GetWitch().haveRescue && currentTurn.characterKilledTonight">
+      {{currentTurn.characterKilledTonight.name}} was killed tonight.
+    </label><br/>
+
+    <button *ngIf="currentTurn.characterKilledTonight
+    && GetWitch().CanRescue(currentTurn.currentNight, currentTurn.characterKilledTonight)"
+            (click)="RescueCharacterKilledTonight(); SwitchTurn()">
+      Rescue
+    </button>
+
+    <label *ngIf="!currentTurn.characterKilledTonight
+    || !GetWitch().CanRescue(currentTurn.currentNight, currentTurn.characterKilledTonight)">
+      Sorry, you can't rescue.
+    </label>
+
+
+
   </div>
 
   <div *ngIf="currentTurn.currentState==GameStateEnum.prophetTurn">
@@ -34,6 +49,7 @@
 
   <label>test: {{currentTurn.currentState}}</label><br>
   <label>test: {{currentTurn.CurrentInstruction()}}</label><br>
+  <label>test: {{test()}}</label><br>
 
 
 </div>

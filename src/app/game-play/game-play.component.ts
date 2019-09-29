@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {DataStore, GameState, GameStateEnum} from '../data-store/data-store.component';
-import {Character, Witch} from '../data-store/character.component';
+import {Character, CharacterState, Witch} from '../data-store/character.component';
 import {Role} from '../data-store/role.component';
 
 @Component({
@@ -23,10 +23,19 @@ export class GamePlayComponent implements OnInit {
     this.players = this.data.GetAllCharacters();
   }
 
-  SelectPersonToKill(name: String) {
+  KillCharacterByName(name: String) {
     const characterKilled = this.data.GetCharacterByName(name);
-    characterKilled.killCharacter();
+    characterKilled.killThisCharacter();
     this.currentTurn.SetCharacterKilledTonight(characterKilled);
+  }
+
+  RescueCharacterKilledTonight() {
+    const witch = this.GetWitch();
+    if (witch.state === CharacterState.alive
+      && witch.CanRescue(this.currentTurn.currentNight, this.currentTurn.characterKilledTonight)
+    ) {
+      witch.Rescue(this.currentTurn.characterKilledTonight);
+    }
   }
 
   StartGame() {
@@ -44,4 +53,8 @@ export class GamePlayComponent implements OnInit {
     return this.data.GetCharactersByRole(Role.Witch)[0] as Witch;
   }
 
+  // TODO: remove later
+  test() {
+    console.log(this.players);
+  }
 }
