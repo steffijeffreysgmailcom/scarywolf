@@ -1,4 +1,4 @@
-import {RescueWitchRules, Role} from '../role.component';
+import {Role} from '../role.component';
 
 export class Character {
 
@@ -7,7 +7,7 @@ export class Character {
   constructor(public name: String, public role: Role) {
   }
 
-  killThisCharacter() {
+  KillThisCharacter() {
     this.state = CharacterState.dead;
   }
 

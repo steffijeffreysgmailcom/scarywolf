@@ -1,12 +1,12 @@
 import {RescueWitchRules, Role} from '../role.component';
-import {Character} from './character.component';
+import {Character, CharacterState} from './character.component';
 
 export class Witch extends Character {
 
   haveRescue = true;
   havePoison = true;
 
-  constructor(public name: String, public role: Role, public rescueWitchRule: RescueWitchRules, bothRescuePoison: boolean) {
+  constructor(public name: String, public role: Role, public rescueWitchRule: RescueWitchRules, public bothRescuePoison: boolean) {
     super(name, role);
   }
 
@@ -23,6 +23,8 @@ export class Witch extends Character {
   }
 
   Rescue(characterKilled: Character) {
-    characterKilled.RescueThisCharacter();
+    if (this.state === CharacterState.alive) {
+      characterKilled.RescueThisCharacter();
+    }
   }
 }

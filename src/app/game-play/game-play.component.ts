@@ -4,6 +4,7 @@ import {GameState, GameStateEnum} from '../data-store/gameState.component';
 import {Character, CharacterState} from '../data-store/character/character.component';
 import {Witch} from '../data-store/character/witch.component';
 import {Role} from '../data-store/role.component';
+import {Wolf} from '../data-store/character/wolf.component';
 
 @Component({
   selector: 'game-play',
@@ -27,15 +28,13 @@ export class GamePlayComponent implements OnInit {
 
   KillCharacterByName(name: String) {
     const characterKilled = this.data.GetCharacterByName(name);
-    characterKilled.killThisCharacter();
+    const wolf = this.GetWolves()[0].Kill(characterKilled);
     this.currentTurn.SetCharacterKilledTonight(characterKilled);
   }
 
   RescueCharacterKilledTonight() {
     const witch = this.GetWitch();
-    if (witch.state === CharacterState.alive
-      && witch.CanRescue(this.currentTurn.currentNight, this.currentTurn.characterKilledTonight)
-    ) {
+    if (witch.CanRescue(this.currentTurn.currentNight, this.currentTurn.characterKilledTonight)) {
       witch.Rescue(this.currentTurn.characterKilledTonight);
     }
   }
@@ -54,6 +53,11 @@ export class GamePlayComponent implements OnInit {
   GetWitch() {
     return this.data.GetCharactersByRole(Role.Witch)[0] as Witch;
   }
+
+  GetWolves() {
+    return this.data.GetCharactersByRole(Role.Wolf) as Array<Wolf>;
+  }
+
 
   // TODO: remove later
   test() {
