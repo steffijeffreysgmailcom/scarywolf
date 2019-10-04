@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {DataStore, Role, Character, Witch} from '../data-store/data-store.component';
-
+import {DataStore} from '../data-store/data-store.component';
+import {Character, Witch} from '../data-store/character.component';
+import {RescueWitchRules, Role} from '../data-store/role.component';
 
 @Component({
   selector: 'game-setup',
@@ -8,18 +9,17 @@ import {DataStore, Role, Character, Witch} from '../data-store/data-store.compon
   styleUrls: ['./game-setup.component.css']
 })
 export class GameSetupComponent implements OnInit {
+
+  RescueWitchRules = RescueWitchRules;
+  Role = Role;
+
   SelectedWitch = true;
   SelectedProphet = true;
   SelectedHunter = true;
   WolvesCounter = 3;
   VillagerCounter = 3;
-  RessuranceWitchRules = {
-    canRessurance: 'canRessurance',
-    canNotRessurance: 'canNotRessurance',
-    canRessuranceOnFirstNight: 'canRessuranceOnFirstNight'
-  };
-  RessuranceWitchRule = this.RessuranceWitchRules.canRessuranceOnFirstNight;
-  bothRessurgancePoisin = false;
+  CurrentRescueWitchRule = RescueWitchRules.canRescueOnFirstNight;
+  BothRescuePoison = false;
   warning: String = '';
 
   constructor(private data: DataStore) {
@@ -29,27 +29,27 @@ export class GameSetupComponent implements OnInit {
     // this.data.StoreCharacter('Greg');
   }
 
-  SelectCharacter(character: string, selected: boolean) {
-    switch (character) {
-      case 'witch':
-        this.SelectedWitch = selected;
+  SelectRole(role: Role) {
+    switch (role) {
+      case Role.Witch:
+        this.SelectedWitch = !this.SelectedWitch;
         break;
-      case 'prophet':
-        this.SelectedProphet = selected;
+      case Role.Prophet:
+        this.SelectedProphet = !this.SelectedProphet;
         break;
-      case 'hunter':
-        this.SelectedHunter = selected;
+      case Role.Hunter:
+        this.SelectedHunter = !this.SelectedHunter;
         break;
     }
     this.ValidateGame();
   }
 
-  AddCharacter(character: string, amount: number) {
-    switch (character) {
-      case 'wolf':
+  AddRole(role: Role, amount: number) {
+    switch (role) {
+      case Role.Wolf:
         this.WolvesCounter += amount;
         break;
-      case 'villager':
+      case Role.Villager:
         this.VillagerCounter += amount;
         break;
     }
@@ -63,7 +63,6 @@ export class GameSetupComponent implements OnInit {
     if (this.WolvesCounter < 0) {
       this.WolvesCounter = 0;
     }
-
     if (this.VillagerCounter > 0 || this.WolvesCounter > 0 || this.SelectedWitch || this.SelectedHunter || this.SelectedProphet) {
       this.warning = '';
       return true;
@@ -74,14 +73,14 @@ export class GameSetupComponent implements OnInit {
 
   StartGame() {
     console.log(':D');
-    for (var i = 0; i < this.VillagerCounter; i++) {
+    for (let i = 0; i < this.VillagerCounter; i++) {
       this.data.StoreCharacter(new Character(this.makeid(2), Role.Villager));
     }
-    for (var i = 0; i < this.WolvesCounter; i++) {
+    for (let i = 0; i < this.WolvesCounter; i++) {
       this.data.StoreCharacter(new Character(this.makeid(2), Role.Wolf));
     }
     if (this.SelectedWitch) {
-      this.data.StoreCharacter(new Witch(this.makeid(2), Role.Witch, this.RessuranceWitchRule, this.bothRessurgancePoisin));
+      this.data.StoreCharacter(new Witch(this.makeid(2), Role.Witch, this.CurrentRescueWitchRule, this.BothRescuePoison));
     }
     if (this.SelectedHunter) {
       this.data.StoreCharacter(new Character(this.makeid(2), Role.Hunter));
@@ -89,7 +88,7 @@ export class GameSetupComponent implements OnInit {
     if (this.SelectedProphet) {
       this.data.StoreCharacter(new Character(this.makeid(2), Role.Prophet));
     }
-
+    console.log(this.data.GetAllCharacters());
   }
 
   makeid(length) {
