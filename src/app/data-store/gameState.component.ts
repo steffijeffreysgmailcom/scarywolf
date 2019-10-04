@@ -19,6 +19,10 @@ export class GameState {
     this.characterKilledTonight = characterKilled;
   }
 
+  SetCharacterPoisonedTonight(characterKilled: Character) {
+    this.characterPoisonedTonight = characterKilled;
+  }
+
 }
 
 export enum GameInstructionEnum {

@@ -26,15 +26,24 @@
 
     <button *ngIf="currentTurn.characterKilledTonight
     && GetWitch().CanRescue(currentTurn.currentNight, currentTurn.characterKilledTonight)"
-            (click)="RescueCharacterKilledTonight(); SwitchTurn()">
+            (click)="RescueCharacterKilledTonight(); SwitchWitchTurn()">
       Rescue
     </button>
+
+    <button *ngIf="GetWitch().CanPoison(currentTurn.currentNight)" (click)="witchSelectPoison=true">Poison</button>
+
+    <div *ngIf="witchSelectPoison">
+      <div *ngFor="let p of players">
+        <button (click)="PoisonCharacterByName(p.name); SwitchWitchTurn()">{{p.name}}</button>
+      </div>
+    </div>
+
+    <button (click)="SwitchTurn()">Do Nothing</button>
 
     <label *ngIf="!currentTurn.characterKilledTonight
     || !GetWitch().CanRescue(currentTurn.currentNight, currentTurn.characterKilledTonight)">
       Sorry, you can't rescue.
     </label>
-
 
 
   </div>

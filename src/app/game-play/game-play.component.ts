@@ -17,6 +17,7 @@ export class GamePlayComponent implements OnInit {
 
   players: Array<Character>;
   currentTurn = new GameState();
+  witchSelectPoison = false;
 
   constructor(private data: DataStore) {
   }
@@ -35,7 +36,30 @@ export class GamePlayComponent implements OnInit {
   RescueCharacterKilledTonight() {
     const witch = this.GetWitch();
     if (witch.CanRescue(this.currentTurn.currentNight, this.currentTurn.characterKilledTonight)) {
-      witch.Rescue(this.currentTurn.characterKilledTonight);
+      witch.Rescue(this.currentTurn.characterKilledTonight, this.currentTurn.currentNight);
+    }
+  }
+
+  PoisonCharacterByName(name: String) {
+    const characterKilled = this.data.GetCharacterByName(name);
+    const witch = this.GetWitch();
+    const tonight = this.currentTurn.currentNight;
+    if (witch.CanPoison(tonight)) {
+      witch.Poison(characterKilled, tonight);
+    }
+    this.currentTurn.SetCharacterPoisonedTonight(characterKilled);
+  }
+
+  SwitchWitchTurn() {
+    const witch = this.GetWitch();
+    const tonight = this.currentTurn.currentNight;
+    console.log(witch.CanPoison(tonight));
+    console.log(witch.CanRescue(tonight, this.currentTurn.characterKilledTonight));
+
+    if (!witch.CanPoison(tonight) && !witch.CanRescue(tonight, this.currentTurn.characterKilledTonight)) {
+
+      this.SwitchTurn();
+      console.log('hi');
     }
   }
 
