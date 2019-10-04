@@ -3,57 +3,62 @@
 
 <div class="row" class='pageContent'>
 
-  <button *ngIf="!SelectedWitch" (click)="SelectCharacter('witch', true)" class="btn btn-primary notselected">
+  <button *ngIf="!SelectedWitch" (click)="SelectRole(Role.Witch)" class="btn btn-primary notselected">
     Select Witch
   </button>
-  <button *ngIf="SelectedWitch" (click)="SelectCharacter('witch', false)" class="btn btn-primary selected">
+  <button *ngIf="SelectedWitch" (click)="SelectRole(Role.Witch)" class="btn btn-primary selected">
     Deselect Witch
   </button>
-  <button *ngIf="!SelectedProphet" (click)="SelectCharacter('prophet', true)" class="btn btn-primary notselected">
+  <button *ngIf="!SelectedProphet" (click)="SelectRole(Role.Prophet)" class="btn btn-primary notselected">
     Select Prophet
   </button>
-  <button *ngIf="SelectedProphet" (click)="SelectCharacter('prophet', false)" class="btn btn-primary selected">
+  <button *ngIf="SelectedProphet" (click)="SelectRole(Role.Prophet)" class="btn btn-primary selected">
     Deselect Prophet
   </button>
-  <button *ngIf="!SelectedHunter" (click)="SelectCharacter('hunter', true)" class="btn btn-primary notselected">
+  <button *ngIf="!SelectedHunter" (click)="SelectRole(Role.Hunter)" class="btn btn-primary notselected">
     Select Hunter
   </button>
-  <button *ngIf="SelectedHunter" (click)="SelectCharacter('hunter', false)" class="btn btn-primary selected">
+  <button *ngIf="SelectedHunter" (click)="SelectRole(Role.Hunter)" class="btn btn-primary selected">
     Deselect Hunter
   </button>
   <div class="btn btn-primary">
     <label>Villagers: {{ VillagerCounter }}</label>
-    <button class="btn btn-primary selected" (click)="AddCharacter('villager', 1)">+</button>
-    <button class="btn btn-primary selected" (click)="AddCharacter('villager', -1)">-</button>
+    <button class="btn btn-primary selected" (click)="AddRole(Role.Villager, 1)">+</button>
+    <button class="btn btn-primary selected" (click)="AddRole(Role.Villager, -1)">-</button>
   </div>
   <div class="btn btn-primary">
     <label>Wolves: {{ WolvesCounter }}</label>
-    <button class="btn btn-primary selected" (click)="AddCharacter('wolf', 1)">+</button>
-    <button class="btn btn-primary selected" (click)="AddCharacter('wolf', -1)">-</button>
+    <button class="btn btn-primary selected" (click)="AddRole(Role.Wolf, 1)">+</button>
+    <button class="btn btn-primary selected" (click)="AddRole(Role.Wolf, -1)">-</button>
   </div>
   <br/>
   <div class="">
     <label>Witch player can choose following rules for Witch</label>
     <br/>
 
-    <input type="checkbox" [checked]="canRessuranceHerself" (change)="canRessuranceHerself = !canRessuranceHerself">
-    <label for="scales">Witch can use ressurgance on herself on first night</label>
-    <br/>
-    <label>canRessuranceHerself: {{canRessuranceHerself}}</label><br/>
+    <input type="radio" name="RescueWitch" checked=checked (change)="CurrentRescueWitchRule = RescueWitchRules.canRescueOnFirstNight">
+    <label for="scales">Witch can use rescue on herself on first night</label><br/>
+    <input type="radio" name="RescueWitch" (change)="CurrentRescueWitchRule = RescueWitchRules.canRescue">
+    <label for="scales">Witch can rescue herself at night if still have the Rescue ability</label> <br/>
+    <input type="radio" name="RescueWitch" (change)="CurrentRescueWitchRule = RescueWitchRules.canNotRescue">
+    <label for="scales">Witch can never rescue herself</label> <br/>
 
-    <input type="radio" name="bothRessurgancePoisin" checked = checked (change)="bothRessurgancePoisin = !bothRessurgancePoisin"> <label for="scales">Witch cannot
-    ressurgance and poisin on the same night</label> <br>
-    <input type="radio" name="bothRessurgancePoisin" (change)="bothRessurgancePoisin = !bothRessurgancePoisin"> <label for="scales">Witch can
-    ressurgance and poisin on the same night</label> <br>
+    <label>CurrentRescueWitchRule: {{CurrentRescueWitchRule}}</label><br/>
 
 
-    <label>bothRessurgancePoisin: {{bothRessurgancePoisin}}</label><br/>
+    <input type="radio" name="bothRescuePoison" checked=checked (change)="BothRescuePoison = !BothRescuePoison">
+    <label for="scales">Witch cannot Rescue and poison on the same night</label> <br>
+    <input type="radio" name="bothRescuePoison" (change)="BothRescuePoison = !BothRescuePoison">
+    <label for="scales">Witch can Rescue and poison on the same night</label> <br>
+
+    <label>BothRescuePoison: {{BothRescuePoison}}</label><br/>
   </div>
 
 
   <br/>
-  <button class="btn btn-primary selected">
-    <a routerLink="/play" routerLinkActive="active">Start Game!</a>
+  <p *ngIf="warning">{{ warning}}</p>
+  <button *ngIf="!warning" class="btn btn-primary selected">
+    <a routerLink="/play" routerLinkActive="active" (click)="StartGame()">Start Game!</a>
   </button>
 
 </div>

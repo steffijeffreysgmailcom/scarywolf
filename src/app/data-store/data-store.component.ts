@@ -1,27 +1,39 @@
-import { Component } from '@angular/core';
-import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
-
-
-
-export enum CharacterState{
-  alive,
-  dead
-}
+import {Injectable} from '@angular/core';
+import {Character} from './character/character.component';
+import {Role} from './role.component';
 
 @Injectable()
 export class DataStore {
-  currentCharacter:String = "Blah";
-  StoreCharacter(name: String) {
-    this.currentCharacter = name;
+
+  characters: Array<Character> = [];
+
+  StoreCharacter(character: Character) {
+    this.characters.push(character);
   }
 
-  UpdateCharacter(state: CharacterState) {
-
+  GetAllCharacters(): Array<Character> {
+    return this.characters;
   }
 
-  GetCharacter() {
-    return this.currentCharacter
+  GetCharacterByName(name: String): Character {
+    let character: Character = null;
+    this.characters.forEach((chara) => {
+      // TODO: comparing string using ===?
+      if (chara.name === name) {
+        character = chara;
+      }
+    });
+    return character;
   }
 
+  GetCharactersByRole(role: Role): Array<Character> {
+    const characters = [];
+    this.characters.forEach((chara) => {
+      // TODO: comparing string using ===?
+      if (chara.role === role) {
+        characters.push(chara);
+      }
+    });
+    return characters;
+  }
 }

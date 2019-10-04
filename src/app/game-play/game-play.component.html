@@ -1,17 +1,66 @@
-
 <h1>Scary wolf game</h1>
 <br/>
 <h2>PLAY</h2>
 
-<h2>{{player}}</h2>
 <div class="row" class='pageContent'>
-    <button (click)="StartGame()" class="btn btn-primary selected">
-        Start Game
+
+  <button *ngIf="currentTurn.currentState==GameStateEnum.closeEyeTurn" (click)="StartGame(); SwitchTurn()"
+          class="btn btn-primary selected">
+    Start Game
+  </button>
+  <br/>
+
+  <div *ngIf="currentTurn.currentState==GameStateEnum.wolvesTurn">
+    <label>{{currentTurn.CurrentInstruction()}}</label>
+    <div *ngFor="let p of players">
+      <button (click)="KillCharacterByName(p.name); SwitchTurn()">{{p.name}}</button>
+    </div>
+  </div>
+
+  <div *ngIf="currentTurn.currentState==GameStateEnum.witchTurn">
+    <label>{{currentTurn.CurrentInstruction()}}</label><br/>
+
+    <label *ngIf="GetWitch().haveRescue && currentTurn.characterKilledTonight">
+      {{currentTurn.characterKilledTonight.name}} was killed tonight.
+    </label><br/>
+
+    <button *ngIf="currentTurn.characterKilledTonight
+    && GetWitch().CanRescue(currentTurn.currentNight, currentTurn.characterKilledTonight)"
+            (click)="RescueCharacterKilledTonight(); SwitchWitchTurn()">
+      Rescue
     </button>
+
+    <button *ngIf="GetWitch().CanPoison(currentTurn.currentNight)" (click)="witchSelectPoison=true">Poison</button>
+
+    <div *ngIf="witchSelectPoison">
+      <div *ngFor="let p of players">
+        <button (click)="PoisonCharacterByName(p.name); SwitchWitchTurn()">{{p.name}}</button>
+      </div>
+    </div>
+
+    <button (click)="SwitchTurn()">Do Nothing</button>
+
+    <label *ngIf="!currentTurn.characterKilledTonight
+    || !GetWitch().CanRescue(currentTurn.currentNight, currentTurn.characterKilledTonight)">
+      Sorry, you can't rescue.
+    </label>
+
+
+  </div>
+
+  <div *ngIf="currentTurn.currentState==GameStateEnum.prophetTurn">
+    lalala
+  </div>
+
+  <div *ngIf="currentTurn.currentState==GameStateEnum.HunterTurn">
+    lalala
+  </div>
+
+  <label>test: {{currentTurn.currentState}}</label><br>
+  <label>test: {{currentTurn.CurrentInstruction()}}</label><br>
+  <label>test: {{test()}}</label><br>
+
+  <label>{{GetWolves()[0].name}}</label>
+
+
 </div>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
