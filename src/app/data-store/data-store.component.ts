@@ -1,40 +1,6 @@
-import {Component} from '@angular/core';
 import {Injectable} from '@angular/core';
-import {BehaviorSubject} from 'rxjs';
-import {Character} from './character.component';
-
-export class GameState {
-
-  currentState = GameStateEnum.closeEyeTurn;
-
-  NextState() {
-    this.currentState += 1;
-  }
-
-  CurrentState() {
-    return this.currentState;
-  }
-
-  CurrentInstruction() {
-    return GameInstructionEnum[GameStateEnum[this.currentState]];
-  }
-}
-
-export enum GameInstructionEnum {
-  'closeEyeTurn' = 'Everyone close your eyes',
-  'wolvesTurn' = 'Wolves open your eyes',
-  'witchTurn' = 'Wolves close your eyes, Witch open your eyes',
-  'prophetTurn' = 'Witch close your eyes, Prophet open your eyes',
-  'HunterTurn' = 'Prophet close your eyes, Hunter open your eyes'
-}
-
-export enum GameStateEnum {
-  'closeEyeTurn',
-  'wolvesTurn',
-  'witchTurn',
-  'prophetTurn',
-  'HunterTurn'
-}
+import {Character} from './character/character.component';
+import {Role} from './role.component';
 
 @Injectable()
 export class DataStore {
@@ -60,4 +26,14 @@ export class DataStore {
     return character;
   }
 
+  GetCharactersByRole(role: Role): Array<Character> {
+    const characters = [];
+    this.characters.forEach((chara) => {
+      // TODO: comparing string using ===?
+      if (chara.role === role) {
+        characters.push(chara);
+      }
+    });
+    return characters;
+  }
 }

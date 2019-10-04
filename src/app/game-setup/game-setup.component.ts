@@ -1,7 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {DataStore} from '../data-store/data-store.component';
-import {Character, Witch} from '../data-store/character.component';
+import {Character} from '../data-store/character/character.component';
+import {Witch} from '../data-store/character/witch.component';
 import {RescueWitchRules, Role} from '../data-store/role.component';
+import {Wolf} from '../data-store/character/wolf.component';
 
 @Component({
   selector: 'game-setup',
@@ -77,7 +79,7 @@ export class GameSetupComponent implements OnInit {
       this.data.StoreCharacter(new Character(this.makeid(2), Role.Villager));
     }
     for (let i = 0; i < this.WolvesCounter; i++) {
-      this.data.StoreCharacter(new Character(this.makeid(2), Role.Wolf));
+      this.data.StoreCharacter(new Wolf(this.makeid(2), Role.Wolf));
     }
     if (this.SelectedWitch) {
       this.data.StoreCharacter(new Witch(this.makeid(2), Role.Witch, this.CurrentRescueWitchRule, this.BothRescuePoison));
@@ -88,7 +90,6 @@ export class GameSetupComponent implements OnInit {
     if (this.SelectedProphet) {
       this.data.StoreCharacter(new Character(this.makeid(2), Role.Prophet));
     }
-    console.log(this.data.GetAllCharacters());
   }
 
   makeid(length) {
