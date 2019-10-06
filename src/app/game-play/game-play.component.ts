@@ -6,6 +6,7 @@ import {Witch} from '../data-store/character/witch.component';
 import {Role} from '../data-store/role.component';
 import {Wolf} from '../data-store/character/wolf.component';
 import {Prophet} from '../data-store/character/prophet.component';
+import {Hunter} from '../data-store/character/hunter.component';
 
 @Component({
   selector: 'game-play',
@@ -104,6 +105,11 @@ export class GamePlayComponent implements OnInit {
   GetProphet() {
     return this.data.GetCharactersByRole(Role.Prophet)[0] as Prophet;
   }
+
+  GetHunter() {
+    return this.data.GetCharactersByRole(Role.Hunter)[0] as Hunter;
+  }
+
 
 
   // TODO: remove later

@@ -40,14 +40,12 @@
     </div>
 
     <button (click)="SwitchTurn(); witchSelectPoison=false">Do Nothing</button>
-
-<!--    <label *ngIf="!currentTurn.characterKilledTonight-->
-<!--    || !GetWitch().CanRescue(currentTurn.currentNight, currentTurn.characterKilledTonight)">-->
-<!--      Sorry, you can't rescue.-->
-<!--    </label>-->
   </div>
 
   <div *ngIf="currentTurn.currentState==GameStateEnum.prophetTurn">
+
+    <label>{{currentTurn.CurrentInstruction()}}</label><br/>
+
     <div *ngIf="!prophetSelectCharacter">
       <div *ngFor="let p of players">
         <button *ngIf="CanDisplayThisCharacter(p)" (click)="ExaminateCharacterByName(p.name); prophetSelectCharacter = true">{{p.name}}</button>
@@ -60,7 +58,9 @@
   </div>
 
   <div *ngIf="currentTurn.currentState==GameStateEnum.HunterTurn">
-    lalala
+    <label>{{currentTurn.CurrentInstruction()}}</label><br/>
+    <label *ngIf="currentTurn.characterPoisonedTonight===GetHunter()">You cannot shoot</label>
+    <label *ngIf="currentTurn.characterPoisonedTonight!==GetHunter()">You can shoot</label>
   </div>
 
   <label>test: {{currentTurn.currentState}}</label><br>
