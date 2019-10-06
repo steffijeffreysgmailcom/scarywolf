@@ -5,6 +5,7 @@ import {Character, CharacterState} from '../data-store/character/character.compo
 import {Witch} from '../data-store/character/witch.component';
 import {Role} from '../data-store/role.component';
 import {Wolf} from '../data-store/character/wolf.component';
+import {Prophet} from '../data-store/character/prophet.component';
 
 @Component({
   selector: 'game-play',
@@ -18,6 +19,8 @@ export class GamePlayComponent implements OnInit {
   players: Array<Character>;
   currentTurn = new GameState();
   witchSelectPoison = false;
+  prophetSelectCharacter = false;
+  characterExaminateResult = null;
 
   constructor(private data: DataStore) {
   }
@@ -50,6 +53,14 @@ export class GamePlayComponent implements OnInit {
     this.currentTurn.SetCharacterPoisonedTonight(characterKilled);
   }
 
+  ExaminateCharacterByName(name: String) {
+    const character = this.data.GetCharacterByName(name);
+    const prophet = this.GetProphet();
+    if (prophet.CanExaminate()) {
+      this.characterExaminateResult = prophet.Examinate(character);
+    }
+  }
+
   SwitchWitchTurn() {
     const witch = this.GetWitch();
     const tonight = this.currentTurn.currentNight;
@@ -80,6 +91,10 @@ export class GamePlayComponent implements OnInit {
 
   GetWolves() {
     return this.data.GetCharactersByRole(Role.Wolf) as Array<Wolf>;
+  }
+
+  GetProphet() {
+    return this.data.GetCharactersByRole(Role.Prophet)[0] as Prophet;
   }
 
 

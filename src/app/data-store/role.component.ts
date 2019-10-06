@@ -13,3 +13,8 @@ export enum RescueWitchRules {
   canNotRescue = 'canNotRescue',
   canRescueOnFirstNight = 'canRescueOnFirstNight'
 }
+
+export enum RoleGoodBad {
+  Good = 'Good',
+  Bad = 'Bad'
+}

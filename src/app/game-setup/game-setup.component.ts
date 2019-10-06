@@ -4,6 +4,7 @@ import {Character} from '../data-store/character/character.component';
 import {Witch} from '../data-store/character/witch.component';
 import {RescueWitchRules, Role} from '../data-store/role.component';
 import {Wolf} from '../data-store/character/wolf.component';
+import {Prophet} from '../data-store/character/prophet.component';
 
 @Component({
   selector: 'game-setup',
@@ -88,7 +89,7 @@ export class GameSetupComponent implements OnInit {
       this.data.StoreCharacter(new Character(this.makeid(2), Role.Hunter));
     }
     if (this.SelectedProphet) {
-      this.data.StoreCharacter(new Character(this.makeid(2), Role.Prophet));
+      this.data.StoreCharacter(new Prophet(this.makeid(2), Role.Prophet));
     }
   }
 

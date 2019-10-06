@@ -34,22 +34,28 @@
 
     <div *ngIf="witchSelectPoison">
       <div *ngFor="let p of players">
-        <button (click)="PoisonCharacterByName(p.name); SwitchWitchTurn()">{{p.name}}</button>
+        <button (click)="PoisonCharacterByName(p.name); witchSelectPoison=false; SwitchWitchTurn()">{{p.name}}</button>
       </div>
     </div>
 
     <button (click)="SwitchTurn()">Do Nothing</button>
 
-    <label *ngIf="!currentTurn.characterKilledTonight
-    || !GetWitch().CanRescue(currentTurn.currentNight, currentTurn.characterKilledTonight)">
-      Sorry, you can't rescue.
-    </label>
-
-
+<!--    <label *ngIf="!currentTurn.characterKilledTonight-->
+<!--    || !GetWitch().CanRescue(currentTurn.currentNight, currentTurn.characterKilledTonight)">-->
+<!--      Sorry, you can't rescue.-->
+<!--    </label>-->
   </div>
 
   <div *ngIf="currentTurn.currentState==GameStateEnum.prophetTurn">
-    lalala
+    <div *ngIf="!prophetSelectCharacter">
+      <div *ngFor="let p of players">
+        <button (click)="ExaminateCharacterByName(p.name); prophetSelectCharacter = true">{{p.name}}</button>
+      </div>
+    </div>
+    <div *ngIf="prophetSelectCharacter">
+      <label>{{characterExaminateResult}}</label>
+      <button (click)="SwitchTurn(); prophetSelectCharacter=false">OK</button>
+    </div>
   </div>
 
   <div *ngIf="currentTurn.currentState==GameStateEnum.HunterTurn">
