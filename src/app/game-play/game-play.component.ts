@@ -15,6 +15,7 @@ import {Prophet} from '../data-store/character/prophet.component';
 export class GamePlayComponent implements OnInit {
 
   GameStateEnum = GameStateEnum;
+  CharacterState = CharacterState;
 
   players: Array<Character>;
   currentTurn = new GameState();
@@ -83,6 +84,13 @@ export class GamePlayComponent implements OnInit {
 
   SwitchTurn() {
     this.currentTurn.NextState();
+  }
+
+  CanDisplayThisCharacter(character: Character) {
+    const isAlive = character.state === CharacterState.alive;
+    const isKilledTonight = character === this.currentTurn.characterKilledTonight;
+    const isPoisonedTonight = character === this.currentTurn.characterPoisonedTonight;
+    return isAlive || isKilledTonight || isPoisonedTonight;
   }
 
   GetWitch() {

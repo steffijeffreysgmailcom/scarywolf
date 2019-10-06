@@ -8,8 +8,6 @@ export class Wolf extends Character {
   }
 
   Kill(characterKilled: Character) {
-    if (this.state === CharacterState.alive) {
-      characterKilled.KillThisCharacter();
-    }
+    characterKilled.KillThisCharacter();
   }
 }

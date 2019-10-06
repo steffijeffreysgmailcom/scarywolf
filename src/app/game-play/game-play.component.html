@@ -13,10 +13,11 @@
   <div *ngIf="currentTurn.currentState==GameStateEnum.wolvesTurn">
     <label>{{currentTurn.CurrentInstruction()}}</label>
     <div *ngFor="let p of players">
-      <button (click)="KillCharacterByName(p.name); SwitchTurn()">{{p.name}}</button>
+      <button *ngIf="CanDisplayThisCharacter(p)" (click)="KillCharacterByName(p.name); SwitchTurn()">{{p.name}}</button>
     </div>
   </div>
 
+<!--  TODO: if witch/hunter/prophet die, their turn still run, but will automatically go to next turn-->
   <div *ngIf="currentTurn.currentState==GameStateEnum.witchTurn">
     <label>{{currentTurn.CurrentInstruction()}}</label><br/>
 
@@ -34,11 +35,11 @@
 
     <div *ngIf="witchSelectPoison">
       <div *ngFor="let p of players">
-        <button (click)="PoisonCharacterByName(p.name); witchSelectPoison=false; SwitchWitchTurn()">{{p.name}}</button>
+        <button *ngIf="CanDisplayThisCharacter(p)" (click)="PoisonCharacterByName(p.name); witchSelectPoison=false; SwitchWitchTurn()">{{p.name}}</button>
       </div>
     </div>
 
-    <button (click)="SwitchTurn()">Do Nothing</button>
+    <button (click)="SwitchTurn(); witchSelectPoison=false">Do Nothing</button>
 
 <!--    <label *ngIf="!currentTurn.characterKilledTonight-->
 <!--    || !GetWitch().CanRescue(currentTurn.currentNight, currentTurn.characterKilledTonight)">-->
@@ -49,7 +50,7 @@
   <div *ngIf="currentTurn.currentState==GameStateEnum.prophetTurn">
     <div *ngIf="!prophetSelectCharacter">
       <div *ngFor="let p of players">
-        <button (click)="ExaminateCharacterByName(p.name); prophetSelectCharacter = true">{{p.name}}</button>
+        <button *ngIf="CanDisplayThisCharacter(p)" (click)="ExaminateCharacterByName(p.name); prophetSelectCharacter = true">{{p.name}}</button>
       </div>
     </div>
     <div *ngIf="prophetSelectCharacter">

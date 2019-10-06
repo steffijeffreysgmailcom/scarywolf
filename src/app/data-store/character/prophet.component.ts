@@ -8,13 +8,11 @@ export class Prophet extends Character {
   }
 
   Examinate(character: Character): RoleGoodBad {
-    if (this.state === CharacterState.alive) {
-      switch (character.role) {
-        case Role.Wolf:
-          return RoleGoodBad.Bad;
-        default:
-          return RoleGoodBad.Good;
-      }
+    switch (character.role) {
+      case Role.Wolf:
+        return RoleGoodBad.Bad;
+      default:
+        return RoleGoodBad.Good;
     }
   }
 
