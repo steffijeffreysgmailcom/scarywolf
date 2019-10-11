@@ -1,8 +1,8 @@
 <h1>Scary wolf game</h1>
 <br/>
-<h2>PLAY</h2>
 
 <div class="row" class='pageContent'>
+  <label>RoomToken: {{currentTurn.RoomToken}}</label><br/>
 
   <button *ngIf="currentTurn.currentState==GameStateEnum.closeEyeTurn" (click)="StartGame(); SwitchTurn()"
           class="btn btn-primary selected">
@@ -61,13 +61,6 @@
     <label>{{currentTurn.CurrentInstruction()}}</label><br/>
     <label *ngIf="currentTurn.characterPoisonedTonight===GetHunter()">You cannot shoot</label>
     <label *ngIf="currentTurn.characterPoisonedTonight!==GetHunter()">You can shoot</label>
+    <button (click)="SwitchTurn()">OK</button>
   </div>
-
-  <label>test: {{currentTurn.currentState}}</label><br>
-  <label>test: {{currentTurn.CurrentInstruction()}}</label><br>
-  <label>test: {{test()}}</label><br>
-
-  <label>{{GetWolves()[0].name}}</label>
-
-
 </div>

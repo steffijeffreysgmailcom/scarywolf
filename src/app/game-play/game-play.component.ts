@@ -7,6 +7,7 @@ import {Role} from '../data-store/role.component';
 import {Wolf} from '../data-store/character/wolf.component';
 import {Prophet} from '../data-store/character/prophet.component';
 import {Hunter} from '../data-store/character/hunter.component';
+import {GameFunction} from '../PublicFunction/game-function.component';
 
 @Component({
   selector: 'game-play',
@@ -19,7 +20,7 @@ export class GamePlayComponent implements OnInit {
   CharacterState = CharacterState;
 
   players: Array<Character>;
-  currentTurn = new GameState();
+  currentTurn: GameState;
   witchSelectPoison = false;
   prophetSelectCharacter = false;
   characterExaminateResult = null;
@@ -30,6 +31,9 @@ export class GamePlayComponent implements OnInit {
   ngOnInit() {
     console.log('here');
     this.players = this.data.GetAllCharacters();
+
+    const RoomToken = GameFunction.makeid(6); // TODO: check if it is valid
+    this.currentTurn = new GameState(RoomToken);
   }
 
   KillCharacterByName(name: String) {
@@ -108,12 +112,5 @@ export class GamePlayComponent implements OnInit {
 
   GetHunter() {
     return this.data.GetCharactersByRole(Role.Hunter)[0] as Hunter;
-  }
-
-
-
-  // TODO: remove later
-  test() {
-    console.log(this.players);
   }
 }

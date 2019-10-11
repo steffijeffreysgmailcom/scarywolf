@@ -7,8 +7,18 @@ export class GameState {
   characterKilledTonight: Character = null;
   characterPoisonedTonight: Character = null;
 
+  constructor(public RoomToken: String) {
+
+  }
+
   NextState() {
     this.currentState += 1;
+    if (GameStateEnum[this.currentState] === undefined) {
+      this.currentNight += 1;
+      this.currentState = GameStateEnum.closeEyeTurn;
+      this.characterKilledTonight = null;
+      this.characterPoisonedTonight = null;
+    }
   }
 
   CurrentInstruction() {
