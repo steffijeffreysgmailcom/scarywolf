@@ -1,0 +1,9 @@
+.selected {
+    background-color: green
+}
+.notselected {
+    background-color: gray
+}
+.btn {
+    margin: 5px;
+}
