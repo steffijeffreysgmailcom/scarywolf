@@ -1,8 +1,8 @@
 <h1>Scary wolf game</h1>
 <br/>
-<h2>PLAY</h2>
 
 <div class="row" class='pageContent'>
+  <label>RoomToken: {{currentTurn.RoomToken}}</label><br/>
 
   <button *ngIf="currentTurn.currentState==GameStateEnum.closeEyeTurn" (click)="StartGame(); SwitchTurn()"
           class="btn btn-primary selected">
@@ -13,10 +13,11 @@
   <div *ngIf="currentTurn.currentState==GameStateEnum.wolvesTurn">
     <label>{{currentTurn.CurrentInstruction()}}</label>
     <div *ngFor="let p of players">
-      <button (click)="KillCharacterByName(p.name); SwitchTurn()">{{p.name}}</button>
+      <button *ngIf="CanDisplayThisCharacter(p)" (click)="KillCharacterByName(p.name); SwitchTurn()">{{p.name}}</button>
     </div>
   </div>
 
+<!--  TODO: if witch/hunter/prophet die, their turn still run, but will automatically go to next turn-->
   <div *ngIf="currentTurn.currentState==GameStateEnum.witchTurn">
     <label>{{currentTurn.CurrentInstruction()}}</label><br/>
 
@@ -34,33 +35,32 @@
 
     <div *ngIf="witchSelectPoison">
       <div *ngFor="let p of players">
-        <button (click)="PoisonCharacterByName(p.name); SwitchWitchTurn()">{{p.name}}</button>
+        <button *ngIf="CanDisplayThisCharacter(p)" (click)="PoisonCharacterByName(p.name); witchSelectPoison=false; SwitchWitchTurn()">{{p.name}}</button>
       </div>
     </div>
 
-    <button (click)="SwitchTurn()">Do Nothing</button>
-
-    <label *ngIf="!currentTurn.characterKilledTonight
-    || !GetWitch().CanRescue(currentTurn.currentNight, currentTurn.characterKilledTonight)">
-      Sorry, you can't rescue.
-    </label>
-
-
+    <button (click)="SwitchTurn(); witchSelectPoison=false">Do Nothing</button>
   </div>
 
   <div *ngIf="currentTurn.currentState==GameStateEnum.prophetTurn">
-    lalala
+
+    <label>{{currentTurn.CurrentInstruction()}}</label><br/>
+
+    <div *ngIf="!prophetSelectCharacter">
+      <div *ngFor="let p of players">
+        <button *ngIf="CanDisplayThisCharacter(p)" (click)="ExaminateCharacterByName(p.name); prophetSelectCharacter = true">{{p.name}}</button>
+      </div>
+    </div>
+    <div *ngIf="prophetSelectCharacter">
+      <label>{{characterExaminateResult}}</label>
+      <button (click)="SwitchTurn(); prophetSelectCharacter=false">OK</button>
+    </div>
   </div>
 
   <div *ngIf="currentTurn.currentState==GameStateEnum.HunterTurn">
-    lalala
+    <label>{{currentTurn.CurrentInstruction()}}</label><br/>
+    <label *ngIf="currentTurn.characterPoisonedTonight===GetHunter()">You cannot shoot</label>
+    <label *ngIf="currentTurn.characterPoisonedTonight!==GetHunter()">You can shoot</label>
+    <button (click)="SwitchTurn()">OK</button>
   </div>
-
-  <label>test: {{currentTurn.currentState}}</label><br>
-  <label>test: {{currentTurn.CurrentInstruction()}}</label><br>
-  <label>test: {{test()}}</label><br>
-
-  <label>{{GetWolves()[0].name}}</label>
-
-
 </div>

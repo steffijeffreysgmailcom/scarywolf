@@ -6,10 +6,13 @@ import { DataStore } from './data-store/data-store.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import {GameHomeComponent} from './game-home/game-home.component';
+import {GameFunction} from './PublicFunction/game-function.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    GameHomeComponent,
     GameSetupComponent,
     GamePlayComponent
   ],
@@ -19,7 +22,8 @@ import { AppComponent } from './app.component';
     NgbModule
   ],
   providers: [
-    DataStore
+    DataStore,
+    GameFunction
   ],
   bootstrap: [AppComponent]
 })

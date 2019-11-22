@@ -4,6 +4,9 @@ import {Character} from '../data-store/character/character.component';
 import {Witch} from '../data-store/character/witch.component';
 import {RescueWitchRules, Role} from '../data-store/role.component';
 import {Wolf} from '../data-store/character/wolf.component';
+import {Prophet} from '../data-store/character/prophet.component';
+import {Hunter} from '../data-store/character/hunter.component';
+import {GameFunction} from '../PublicFunction/game-function.component';
 
 @Component({
   selector: 'game-setup',
@@ -76,30 +79,19 @@ export class GameSetupComponent implements OnInit {
   StartGame() {
     console.log(':D');
     for (let i = 0; i < this.VillagerCounter; i++) {
-      this.data.StoreCharacter(new Character(this.makeid(2), Role.Villager));
+      this.data.StoreCharacter(new Character(GameFunction.makeid(2), Role.Villager));
     }
     for (let i = 0; i < this.WolvesCounter; i++) {
-      this.data.StoreCharacter(new Wolf(this.makeid(2), Role.Wolf));
+      this.data.StoreCharacter(new Wolf(GameFunction.makeid(2), Role.Wolf));
     }
     if (this.SelectedWitch) {
-      this.data.StoreCharacter(new Witch(this.makeid(2), Role.Witch, this.CurrentRescueWitchRule, this.BothRescuePoison));
+      this.data.StoreCharacter(new Witch(GameFunction.makeid(2), Role.Witch, this.CurrentRescueWitchRule, this.BothRescuePoison));
     }
     if (this.SelectedHunter) {
-      this.data.StoreCharacter(new Character(this.makeid(2), Role.Hunter));
+      this.data.StoreCharacter(new Hunter(GameFunction.makeid(2), Role.Hunter));
     }
     if (this.SelectedProphet) {
-      this.data.StoreCharacter(new Character(this.makeid(2), Role.Prophet));
+      this.data.StoreCharacter(new Prophet(GameFunction.makeid(2), Role.Prophet));
     }
   }
-
-  makeid(length) {
-    let result = '';
-    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    const charactersLength = characters.length;
-    for (let i = 0; i < length; i++) {
-      result += characters.charAt(Math.floor(Math.random() * charactersLength));
-    }
-    return result;
-  }
-
 }

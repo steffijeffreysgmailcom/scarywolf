@@ -49,10 +49,8 @@ export class Witch extends Character {
   }
 
   Poison(characterKilled: Character, night: Number) {
-    if (this.state === CharacterState.alive) {
-      characterKilled.KillThisCharacter();
-      this.nightUsedPoison = night;
-      this.havePoison = false;
-    }
+    characterKilled.KillThisCharacter();
+    this.nightUsedPoison = night;
+    this.havePoison = false;
   }
 }

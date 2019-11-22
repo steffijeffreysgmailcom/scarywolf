@@ -5,6 +5,9 @@ import {Character, CharacterState} from '../data-store/character/character.compo
 import {Witch} from '../data-store/character/witch.component';
 import {Role} from '../data-store/role.component';
 import {Wolf} from '../data-store/character/wolf.component';
+import {Prophet} from '../data-store/character/prophet.component';
+import {Hunter} from '../data-store/character/hunter.component';
+import {GameFunction} from '../PublicFunction/game-function.component';
 
 @Component({
   selector: 'game-play',
@@ -14,10 +17,13 @@ import {Wolf} from '../data-store/character/wolf.component';
 export class GamePlayComponent implements OnInit {
 
   GameStateEnum = GameStateEnum;
+  CharacterState = CharacterState;
 
   players: Array<Character>;
-  currentTurn = new GameState();
+  currentTurn: GameState;
   witchSelectPoison = false;
+  prophetSelectCharacter = false;
+  characterExaminateResult = null;
 
   constructor(private data: DataStore) {
   }
@@ -25,6 +31,9 @@ export class GamePlayComponent implements OnInit {
   ngOnInit() {
     console.log('here');
     this.players = this.data.GetAllCharacters();
+
+    const RoomToken = GameFunction.makeid(6); // TODO: check if it is valid
+    this.currentTurn = new GameState(RoomToken);
   }
 
   KillCharacterByName(name: String) {
@@ -48,6 +57,14 @@ export class GamePlayComponent implements OnInit {
       witch.Poison(characterKilled, tonight);
     }
     this.currentTurn.SetCharacterPoisonedTonight(characterKilled);
+  }
+
+  ExaminateCharacterByName(name: String) {
+    const character = this.data.GetCharacterByName(name);
+    const prophet = this.GetProphet();
+    if (prophet.CanExaminate()) {
+      this.characterExaminateResult = prophet.Examinate(character);
+    }
   }
 
   SwitchWitchTurn() {
@@ -74,6 +91,13 @@ export class GamePlayComponent implements OnInit {
     this.currentTurn.NextState();
   }
 
+  CanDisplayThisCharacter(character: Character) {
+    const isAlive = character.state === CharacterState.alive;
+    const isKilledTonight = character === this.currentTurn.characterKilledTonight;
+    const isPoisonedTonight = character === this.currentTurn.characterPoisonedTonight;
+    return isAlive || isKilledTonight || isPoisonedTonight;
+  }
+
   GetWitch() {
     return this.data.GetCharactersByRole(Role.Witch)[0] as Witch;
   }
@@ -82,9 +106,11 @@ export class GamePlayComponent implements OnInit {
     return this.data.GetCharactersByRole(Role.Wolf) as Array<Wolf>;
   }
 
+  GetProphet() {
+    return this.data.GetCharactersByRole(Role.Prophet)[0] as Prophet;
+  }
 
-  // TODO: remove later
-  test() {
-    console.log(this.players);
+  GetHunter() {
+    return this.data.GetCharactersByRole(Role.Hunter)[0] as Hunter;
   }
 }
