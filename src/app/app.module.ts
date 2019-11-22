@@ -10,6 +10,7 @@ import {GameHomeComponent} from './game-home/game-home.component';
 import {GameFunction} from './PublicFunction/game-function.component';
 import {GameJoinComponent} from './game-join/game-join.component';
 import {FormsModule} from '@angular/forms';
+import { AppsyncService } from './data-store/appsync.service'
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import {FormsModule} from '@angular/forms';
     FormsModule
   ],
   providers: [
+    AppsyncService,
     DataStore,
     GameFunction
   ],

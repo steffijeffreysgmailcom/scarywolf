@@ -1,0 +1,98 @@
+﻿schema {
+  query: Query
+  mutation: Mutation
+  subscription: Subscription
+}
+
+type Mutation {
+  createScaryWolf(input: CreateScaryWolfInput!): ScaryWolf
+  updateScaryWolf(input: UpdateScaryWolfInput!): ScaryWolf
+}
+
+type Query {
+  getScaryWolf(Token: String!): ScaryWolf
+}
+
+type ScaryWolf {
+  GameState: AWSJSON
+  Token: String!
+}
+
+type ScaryWolfConnection {
+  items: [ScaryWolf]
+  nextToken: String
+}
+
+type Subscription {
+  onCreateScaryWolf(GameState: AWSJSON, Token: String): ScaryWolf @aws_subscribe(mutations : ["createScaryWolf"])
+  onUpdateScaryWolf(GameState: AWSJSON, Token: String): ScaryWolf @aws_subscribe(mutations : ["updateScaryWolf"])
+}
+
+input CreateScaryWolfInput {
+  GameState: AWSJSON
+  Token: String!
+}
+
+input TableBooleanFilterInput {
+  eq: Boolean
+  ne: Boolean
+}
+
+input TableFloatFilterInput {
+  between: [Float]
+  contains: Float
+  eq: Float
+  ge: Float
+  gt: Float
+  le: Float
+  lt: Float
+  ne: Float
+  notContains: Float
+}
+
+input TableIDFilterInput {
+  beginsWith: ID
+  between: [ID]
+  contains: ID
+  eq: ID
+  ge: ID
+  gt: ID
+  le: ID
+  lt: ID
+  ne: ID
+  notContains: ID
+}
+
+input TableIntFilterInput {
+  between: [Int]
+  contains: Int
+  eq: Int
+  ge: Int
+  gt: Int
+  le: Int
+  lt: Int
+  ne: Int
+  notContains: Int
+}
+
+input TableScaryWolfFilterInput {
+  Token: TableStringFilterInput
+}
+
+input TableStringFilterInput {
+  beginsWith: String
+  between: [String]
+  contains: String
+  eq: String
+  ge: String
+  gt: String
+  le: String
+  lt: String
+  ne: String
+  notContains: String
+}
+
+input UpdateScaryWolfInput {
+  GameState: AWSJSON
+  Token: String!
+}
