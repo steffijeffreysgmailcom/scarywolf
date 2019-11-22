@@ -8,18 +8,22 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {GameHomeComponent} from './game-home/game-home.component';
 import {GameFunction} from './PublicFunction/game-function.component';
+import {GameJoinComponent} from './game-join/game-join.component';
+import {FormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
     AppComponent,
     GameHomeComponent,
+    GameJoinComponent,
     GameSetupComponent,
     GamePlayComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    NgbModule
+    NgbModule,
+    FormsModule
   ],
   providers: [
     DataStore,
