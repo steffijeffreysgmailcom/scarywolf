@@ -31,7 +31,7 @@ export class GameSetupComponent implements OnInit {
   }
 
   ngOnInit() {
-    // this.data.StoreCharacter('Greg');
+    // this.data.StoreCharacters('Greg');
   }
 
   SelectRole(role: Role) {
@@ -77,21 +77,26 @@ export class GameSetupComponent implements OnInit {
   }
 
   StartGame() {
+    const RoomToken = GameFunction.makeid(6); // TODO: check if it is valid
+    const characters = new Array<Character>();
+
     console.log(':D');
     for (let i = 0; i < this.VillagerCounter; i++) {
-      this.data.StoreCharacter(new Character(GameFunction.makeid(2), Role.Villager));
+      characters.push(new Character(GameFunction.makeid(2), Role.Villager));
     }
     for (let i = 0; i < this.WolvesCounter; i++) {
-      this.data.StoreCharacter(new Wolf(GameFunction.makeid(2), Role.Wolf));
+      characters.push(new Wolf(GameFunction.makeid(2), Role.Wolf));
     }
     if (this.SelectedWitch) {
-      this.data.StoreCharacter(new Witch(GameFunction.makeid(2), Role.Witch, this.CurrentRescueWitchRule, this.BothRescuePoison));
+      characters.push(new Witch(GameFunction.makeid(2), Role.Witch, this.CurrentRescueWitchRule, this.BothRescuePoison));
     }
     if (this.SelectedHunter) {
-      this.data.StoreCharacter(new Hunter(GameFunction.makeid(2), Role.Hunter));
+      characters.push(new Hunter(GameFunction.makeid(2), Role.Hunter));
     }
     if (this.SelectedProphet) {
-      this.data.StoreCharacter(new Prophet(GameFunction.makeid(2), Role.Prophet));
+      characters.push(new Prophet(GameFunction.makeid(2), Role.Prophet));
     }
+
+    this.data.StoreCharacters(RoomToken, characters);
   }
 }

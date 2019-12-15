@@ -15,7 +15,7 @@ export class AppsyncService {
        region: "ap-southeast-1",
        auth: {
          type: AUTH_TYPE.API_KEY,
-         apiKey: "da2-kvfcnu6fxvdyffdzg5ho7a5mlq"
+         apiKey: "da2-e6xfolswuvdavgdmkz4a7woiwa"
        }
      });
      // this.hc = client.hydrated;

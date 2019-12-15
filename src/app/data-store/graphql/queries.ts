@@ -7,6 +7,7 @@ export const getScaryWolf = gql`query GetScaryWolf($Token: String!) {
   getScaryWolf(Token: $Token) {
     GameState
     Token
+    Characters
   }
 }
 `;

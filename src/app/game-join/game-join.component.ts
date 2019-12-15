@@ -16,6 +16,6 @@ export class GameJoinComponent implements OnInit {
   }
 
   ngOnInit() {
-    // this.data.StoreCharacter('Greg');
+    // this.data.StoreCharacters('Greg');
   }
 }
