@@ -7,13 +7,14 @@ import {Wolf} from '../data-store/character/wolf.component';
 import {Prophet} from '../data-store/character/prophet.component';
 import {Hunter} from '../data-store/character/hunter.component';
 import {GameFunction} from '../PublicFunction/game-function.component';
+import {Router} from '@angular/router';
 
 @Component({
-  selector: 'game-setup',
-  templateUrl: './game-setup.component.html',
-  styleUrls: ['./game-setup.component.css']
+  selector: 'game-create',
+  templateUrl: './game-create.component.html',
+  styleUrls: ['./game-create.component.css']
 })
-export class GameSetupComponent implements OnInit {
+export class GameCreateComponent implements OnInit {
 
   RescueWitchRules = RescueWitchRules;
   Role = Role;
@@ -27,11 +28,10 @@ export class GameSetupComponent implements OnInit {
   BothRescuePoison = false;
   warning: String = '';
 
-  constructor(private data: DataStore) {
+  constructor(private data: DataStore, private router: Router) {
   }
 
   ngOnInit() {
-    // this.data.StoreCharacters('Greg');
   }
 
   SelectRole(role: Role) {
@@ -96,7 +96,9 @@ export class GameSetupComponent implements OnInit {
     if (this.SelectedProphet) {
       characters.push(new Prophet(GameFunction.makeid(2), Role.Prophet));
     }
-
-    this.data.StoreCharacters(RoomToken, characters);
+    this.data.RoomToken = RoomToken;
+    this.data.CreateRoom(characters, () => {
+      this.router.navigateByUrl('/play');
+    });
   }
 }

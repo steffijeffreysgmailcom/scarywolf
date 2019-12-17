@@ -1,60 +1,111 @@
 import {Injectable} from '@angular/core';
 import {Character} from './character/character.component';
-import {Role} from './role.component';
+import {RescueWitchRules, Role} from './role.component';
 import {AppsyncService} from './appsync.service';
-import {GetScaryWolfQuery} from './API';
 import {getScaryWolf} from './graphql/queries';
-import {createScaryWolf} from './graphql/mutations';
+import {createScaryWolf, updateScaryWolf} from './graphql/mutations';
 import {GameState} from './gameState.component';
+import {Wolf} from './character/wolf.component';
+import {Witch} from './character/witch.component';
+import {Prophet} from './character/prophet.component';
+import {Hunter} from './character/hunter.component';
 
-//import { listScaryWolves } from './graphql/queries/listall';
 
 @Injectable()
 export class DataStore {
 
   characters: Character[];
+  RoomToken: string;
 
   constructor(private appsync: AppsyncService) {
   }
 
-  StoreCharacters(RoomToken: string, characters: Character[]) {
+  CreateRoom(characters: Character[], callback) {
     this.characters = characters;
-    // console.log({GameState: 'hi',Token: RoomToken, Characters: this.characters});
 
     this.appsync.hc().then(client => {
       const observable = client.mutate({
         mutation: createScaryWolf,
         variables: {
           input: {
-            GameState: JSON.stringify(new GameState(RoomToken)),
-            Token: RoomToken,
+            GameState: JSON.stringify(new GameState(this.RoomToken)),
+            Token: this.RoomToken,
             Characters: JSON.stringify(this.characters)
           }
         },
 
-      }).then(data => console.log('success', data))
+      }).then(data => callback(data))
         .catch(error => console.error('error', error));
     });
-
-    //
-    // this.appsync.hc().then(client => {
-    //   const observable = client.watchQuery({
-    //     query: getScaryWolf,
-    //     variables: {Token: 'guykg'},
-    //     fetchPolicy: 'cache-and-network'
-    //   });
-    //
-    //   observable.subscribe(({data}) => {
-    //     if (!data) {
-    //       return console.log('getAllUsers - no data');
-    //     }
-    //     console.log(data);
-    //   });
-    // });
   }
 
-  GetAllCharacters(): Array<Character> {
-    return this.characters;
+  UpdateRoom(gameState: GameState, characters: Character[], callback) {
+    this.characters = characters;
+
+    this.appsync.hc().then(client => {
+      const observable = client.mutate({
+        mutation: updateScaryWolf,
+        variables: {
+          input: {
+            Token: this.RoomToken,
+            GameState: JSON.stringify(gameState),
+            Characters: JSON.stringify(this.characters)
+          }
+        },
+
+      }).then(data => callback(data))
+        .catch(error => console.error('error', error));
+    });
+  }
+
+  GetAll(callback) {
+    this.appsync.hc().then(client => {
+      const observable = client.watchQuery({
+        query: getScaryWolf,
+        variables: {Token: this.RoomToken}
+      });
+
+      observable.subscribe(({data}) => {
+        if (!data) {
+          console.log('getAllUsers - no data');
+        } else {
+          console.log(data)
+          callback(this.ConvertJsonToCharacter(data.getScaryWolf.Characters), JSON.parse(data.getScaryWolf.GameState))
+          ;
+        }
+      });
+    });
+  }
+
+  ConvertJsonToCharacter(json) {
+    const charactersArray = new Array<Character>();
+    for (const character of JSON.parse(json)) {
+      let char = null;
+      switch (character.role) {
+        case Role.Villager:
+          char = new Character(character.name, character.role);
+          break;
+        case Role.Wolf:
+          char = new Wolf(character.name, character.role);
+          break;
+        case Role.Witch:
+          char = new Witch(character.name, character.role, character.rescueWitchRule, character.bothRescuePoison);
+          char.haveRescue = character.haveRescue;
+          char.havePoison = character.havePoison;
+          char.nightUsedRescue = character.nightUsedRescue;
+          char.nightUsedPoison = character.nightUsedPoison;
+          break;
+        case Role.Prophet:
+          char = new Prophet(character.name, character.role);
+          break;
+        case Role.Hunter:
+          char = new Hunter(character.name, character.role);
+          break;
+      }
+      char.state = character.state;
+      charactersArray.push(char);
+    }
+    return charactersArray;
   }
 
   GetCharacterByName(name: String): Character {

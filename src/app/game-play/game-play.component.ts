@@ -30,10 +30,12 @@ export class GamePlayComponent implements OnInit {
 
   ngOnInit() {
     console.log('here');
-    this.players = this.data.GetAllCharacters();
 
-    const RoomToken = GameFunction.makeid(6); // TODO: check if it is valid
-    this.currentTurn = new GameState(RoomToken);
+    this.data.GetAll((characters, gameState) => {
+      this.players = characters;
+      this.currentTurn = gameState;
+    });
+
   }
 
   KillCharacterByName(name: String) {
@@ -74,9 +76,7 @@ export class GamePlayComponent implements OnInit {
     console.log(witch.CanRescue(tonight, this.currentTurn.characterKilledTonight));
 
     if (!witch.CanPoison(tonight) && !witch.CanRescue(tonight, this.currentTurn.characterKilledTonight)) {
-
       this.SwitchTurn();
-      console.log('hi');
     }
   }
 
@@ -88,7 +88,9 @@ export class GamePlayComponent implements OnInit {
   }
 
   SwitchTurn() {
-    this.currentTurn.NextState();
+    this.data.UpdateRoom(this.currentTurn, this.players, () => {
+      this.currentTurn.NextState();
+    });
   }
 
   CanDisplayThisCharacter(character: Character) {

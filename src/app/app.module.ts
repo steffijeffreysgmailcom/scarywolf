@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { GameSetupComponent } from './game-setup/game-setup.component';
+import { GameCreateComponent } from './game-create/game-create.component';
 import { GamePlayComponent } from './game-play/game-play.component';
 import { DataStore } from './data-store/data-store.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
@@ -17,7 +17,7 @@ import { AppsyncService } from './data-store/appsync.service'
     AppComponent,
     GameHomeComponent,
     GameJoinComponent,
-    GameSetupComponent,
+    GameCreateComponent,
     GamePlayComponent
   ],
   imports: [

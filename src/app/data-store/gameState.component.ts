@@ -3,7 +3,7 @@ import {Character} from './character/character.component';
 export class GameState {
 
   currentNight = 1; // TODO: figure out how to increase currentNight later
-  currentState = GameStateEnum.closeEyeTurn;
+  currentState = GameStateEnum.closeEyeTurn; // each step at night
   characterKilledTonight: Character = null;
   characterPoisonedTonight: Character = null;
 

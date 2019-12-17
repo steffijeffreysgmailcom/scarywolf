@@ -1,8 +1,16 @@
 <h1>Scary wolf game</h1>
 <br/>
 
-<div class="row" class='pageContent'>
+<div *ngIf="currentTurn!=undefined" class="row" class='pageContent'>
   <label>RoomToken: {{currentTurn.RoomToken}}</label><br/>
+
+  <div *ngFor="let p of players">
+    <label>{{p.name}}</label>
+  </div>
+
+
+
+
 
   <button *ngIf="currentTurn.currentState==GameStateEnum.closeEyeTurn" (click)="StartGame(); SwitchTurn()"
           class="btn btn-primary selected">

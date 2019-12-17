@@ -5,9 +5,9 @@
 
 <form>
     Please enter Room Token: <input type="text" name="RoomToken" [(ngModel)]="RoomToken">
-  <a routerLink="/play" routerLinkActive="active"><input type="submit" value="Submit"></a>
+  <a routerLinkActive="active" (click)="JoinGame()"><input type="submit" value="Submit"></a>
 
-  <br><label>console.log(roomToken): {{RoomToken}}</label>
+  <br><label>{{RoomToken}}</label>
 
 </form>
 
