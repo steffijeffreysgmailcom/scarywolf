@@ -1,16 +1,15 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-import { GameCreateComponent } from './game-create/game-create.component';
-import { GamePlayComponent } from './game-play/game-play.component';
-import { DataStore } from './data-store/data-store.component';
+import {BrowserModule} from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
+import {GameCreateComponent} from './game-create/game-create.component';
+import {GamePlayComponent} from './game-play/game-play.component';
+import {DataStore} from './data-store/data-store.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
+import {AppRoutingModule} from './app-routing.module';
+import {AppComponent} from './app.component';
 import {GameHomeComponent} from './game-home/game-home.component';
-import {GameFunction} from './PublicFunction/game-function.component';
 import {GameJoinComponent} from './game-join/game-join.component';
 import {FormsModule} from '@angular/forms';
-import { AppsyncService } from './data-store/appsync.service'
+import {AppsyncService} from './data-store/appsync.service';
 
 @NgModule({
   declarations: [
@@ -28,10 +27,10 @@ import { AppsyncService } from './data-store/appsync.service'
   ],
   providers: [
     AppsyncService,
-    DataStore,
-    GameFunction
+    DataStore
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}
 

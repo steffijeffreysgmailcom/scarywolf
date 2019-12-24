@@ -1,9 +1,11 @@
 .selected {
-    background-color: green
+  background-color: green
 }
+
 .notselected {
-    background-color: gray
+  background-color: gray
 }
+
 .btn {
-    margin: 5px;
+  margin: 5px;
 }

@@ -32,7 +32,8 @@
     <button class="btn btn-primary selected" (click)="AddRole(Role.Wolf, -1)">-</button>
   </div>
   <br/>
-  <div class="">
+
+  <div>
     <label>Witch player can choose following rules for Witch</label>
     <br/>
 
@@ -43,22 +44,13 @@
     <input type="radio" name="RescueWitch" (change)="CurrentRescueWitchRule = RescueWitchRules.canNotRescue">
     <label for="scales">Witch can never rescue herself</label> <br/>
 
-    <label>CurrentRescueWitchRule: {{CurrentRescueWitchRule}}</label><br/>
-
-
     <input type="radio" name="bothRescuePoison" checked=checked (change)="BothRescuePoison = !BothRescuePoison">
     <label for="scales">Witch cannot Rescue and poison on the same night</label> <br>
     <input type="radio" name="bothRescuePoison" (change)="BothRescuePoison = !BothRescuePoison">
     <label for="scales">Witch can Rescue and poison on the same night</label> <br>
-
-    <label>BothRescuePoison: {{BothRescuePoison}}</label><br/>
   </div>
-
-
   <br/>
-  <p *ngIf="warning">{{ warning}}</p>
-  <button *ngIf="!warning" class="btn btn-primary selected">
-    <a routerLinkActive="active" (click)="StartGame()">Start Game!</a>
-  </button>
 
+  <p *ngIf="warning">{{warning}}</p>
+  <button *ngIf="!warning" class="btn btn-primary selected" (click)="StartGame()">Start Game!</button>
 </div>

@@ -8,7 +8,6 @@ export class GameState {
   characterPoisonedTonight: Character = null;
 
   constructor(public RoomToken: String) {
-
   }
 
   NextState() {

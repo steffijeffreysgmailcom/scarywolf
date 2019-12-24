@@ -9,9 +9,6 @@
   </div>
 
 
-
-
-
   <button *ngIf="currentTurn.currentState==GameStateEnum.closeEyeTurn" (click)="StartGame(); SwitchTurn()"
           class="btn btn-primary selected">
     Start Game
@@ -25,7 +22,7 @@
     </div>
   </div>
 
-<!--  TODO: if witch/hunter/prophet die, their turn still run, but will automatically go to next turn-->
+  <!--  TODO: if witch/hunter/prophet die, their turn still run, but will automatically go to next turn-->
   <div *ngIf="currentTurn.currentState==GameStateEnum.witchTurn">
     <label>{{currentTurn.CurrentInstruction()}}</label><br/>
 
@@ -43,7 +40,8 @@
 
     <div *ngIf="witchSelectPoison">
       <div *ngFor="let p of players">
-        <button *ngIf="CanDisplayThisCharacter(p)" (click)="PoisonCharacterByName(p.name); witchSelectPoison=false; SwitchWitchTurn()">{{p.name}}</button>
+        <button *ngIf="CanDisplayThisCharacter(p)"
+                (click)="PoisonCharacterByName(p.name); witchSelectPoison=false; SwitchWitchTurn()">{{p.name}}</button>
       </div>
     </div>
 

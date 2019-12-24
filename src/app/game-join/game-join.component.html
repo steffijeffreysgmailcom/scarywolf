@@ -1,14 +1,7 @@
 <h1>Scary wolf game</h1>
 <br/>
 
-<div class="row" class='pageContent'>
-
-<form>
-    Please enter Room Token: <input type="text" name="RoomToken" [(ngModel)]="RoomToken">
-  <a routerLinkActive="active" (click)="JoinGame()"><input type="submit" value="Submit"></a>
-
-  <br><label>{{RoomToken}}</label>
-
+<form (ngSubmit)="JoinGame()">
+  Please enter Room Token: <input type="text" name="RoomToken" [(ngModel)]="RoomToken">
+  <input type="submit" value="Submit">
 </form>
-
-</div>

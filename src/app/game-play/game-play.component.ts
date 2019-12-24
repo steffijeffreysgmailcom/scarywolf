@@ -7,7 +7,6 @@ import {Role} from '../data-store/role.component';
 import {Wolf} from '../data-store/character/wolf.component';
 import {Prophet} from '../data-store/character/prophet.component';
 import {Hunter} from '../data-store/character/hunter.component';
-import {GameFunction} from '../PublicFunction/game-function.component';
 
 @Component({
   selector: 'game-play',
@@ -31,7 +30,7 @@ export class GamePlayComponent implements OnInit {
   ngOnInit() {
     console.log('here');
 
-    this.data.GetAll((characters, gameState) => {
+    this.data.GetRoom((characters, gameState) => {
       this.players = characters;
       this.currentTurn = gameState;
     });

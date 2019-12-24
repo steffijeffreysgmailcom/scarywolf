@@ -11,13 +11,3 @@ export const getScaryWolf = gql`query GetScaryWolf($Token: String!) {
   }
 }
 `;
-
-// export default gql`
-// query listScaryWolves($token: String!) {
-//     getScaryWolf(Token: $token) {
-//       Token
-//       GameState
-//     }
-//   }`;
-
-   
